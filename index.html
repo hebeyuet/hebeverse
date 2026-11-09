@@ -434,8 +434,8 @@ html[data-motion="on"] dialog:not([open])::backdrop{background-color:rgba(18,10,
 .screen{position:relative; width:100%; max-width:100%; aspect-ratio:16/9; background:#0d0720; border-radius:14px; box-shadow:0 0 0 3px var(--line),0 8px 18px -8px rgba(0,0,0,.5); overflow:hidden}
 .screen iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
 /* photo board: loose, overlapping prints you can drag around */
-.pboard{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; overflow:hidden; background:radial-gradient(120% 90% at 30% 10%,#3a1d86 0%,#1b0e44 60%,#120a2e 100%); box-shadow:0 0 0 3px var(--line),0 8px 18px -8px rgba(0,0,0,.5); touch-action:pan-y; user-select:none; -webkit-user-select:none}
-.pboard .phint{position:absolute; left:0; right:0; bottom:0; padding:1.2rem 0 .5rem; background:linear-gradient(transparent,rgba(18,10,46,.82)); z-index:2000; text-align:center; font:400 .95rem/1 var(--font-pixel); letter-spacing:.06em; color:rgba(240,232,255,.78); pointer-events:none; text-shadow:0 1px 2px rgba(10,5,40,.8)}
+.pboard{position:relative; width:100%; aspect-ratio:16/10; border-radius:2px; overflow:hidden; background:linear-gradient(rgba(255,255,255,.34) 1px,transparent 1px) 0 0/1.5rem 1.5rem,linear-gradient(90deg,rgba(255,255,255,.34) 1px,transparent 1px) 0 0/1.5rem 1.5rem,#7d83a3; box-shadow:0 10px 20px -8px rgba(40,20,100,.5); touch-action:pan-y; user-select:none; -webkit-user-select:none}   /* grid paper, same colours as the u in About, no frame */
+.pboard .phint{position:absolute; left:0; right:0; bottom:0; padding:1.2rem 0 .5rem; z-index:2000; text-align:center; font:400 .95rem/1 var(--font-pixel); letter-spacing:.06em; color:#fff; pointer-events:none; text-shadow:0 1px 3px rgba(40,30,90,.7)}
 .photo{position:absolute; margin:0; padding:6px; background:#f7f6ff; border-radius:3px; box-shadow:0 0 0 1px rgba(120,110,170,.55),0 10px 18px -8px rgba(5,0,30,.75); transform:translate(-50%,-50%) rotate(var(--r,0deg)); cursor:grab; touch-action:none; outline-offset:3px}
 .photo:active,.photo.drag{cursor:grabbing; box-shadow:0 0 0 1px rgba(120,110,170,.55),0 18px 26px -8px rgba(5,0,30,.85)}
 .photo:focus-visible{outline:3px solid var(--purple)}
@@ -705,7 +705,7 @@ html[data-motion="on"] .labels.pan-anim .lbl{transition:left .42s cubic-bezier(.
 .world-wrap.canpan{cursor:grab} .world-wrap.panning,.world-wrap.panning .island,.world-wrap.panning .lbl{cursor:grabbing}
 #hudMeta{white-space:pre-line}
 #viewer:has(#vPrev:not([hidden])) #vTitle{padding-right:10.6rem}
-@media (max-width:700px){#viewer:has(#vPrev:not([hidden])) #vTitle{padding-right:0} .hero .role{margin-top:.35rem}}   /* phones: the title may use the full width; the subheading sits a little higher */
+@media (max-width:700px){#viewer:has(#vPrev:not([hidden])) #vTitle{padding-right:0} .hero .role{margin-top:-.45rem}}   /* phones: the title may use the full width; the subheading sits a little higher */
 @media (max-width:520px){.vbar{height:52px; gap:.4rem; padding:0 .5rem 0 .9rem} #viewer .x{width:40px; height:40px} #viewer .cap button{width:42px; height:34px}}
 /* previous / next share one silver capsule, built like the theme toggles; close is a purple bevelled button like .btn */
 .vscroll:focus{outline:none}
@@ -1653,7 +1653,7 @@ function afterFs(){
 function fsFake(){ workDev.classList.add('fs-fake'); afterFs(); }
 fsBtn.addEventListener('click', () => {
   if(workDev.classList.contains('fs')){ workDev.classList.remove('fs-fake'); if(document.fullscreenElement) document.exitFullscreen(); afterFs(); return; }
-  if(workDev.requestFullscreen){ const p = workDev.requestFullscreen(); if(p && p.catch) p.catch(fsFake); } else fsFake();
+  fsFake();   // fills the browser window instead of using real full screen, so a video's own full screen button works normally (F11 gives real full screen)
 });
 document.addEventListener('fullscreenchange', afterFs);
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && workDev.classList.contains('fs-fake') && !document.querySelector('dialog[open]')){ workDev.classList.remove('fs-fake'); afterFs(); } });
