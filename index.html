@@ -109,7 +109,6 @@ a{color:var(--purple)}
 /* ---------- silver building blocks ---------- */
 .plate{border:2.5px solid transparent; border-radius:22px; background:var(--plate-bg) padding-box,var(--bevel) border-box; box-shadow:var(--drop)}
 .device{position:relative; padding:10px; border-radius:30px; background:var(--bezel); border:1.5px solid var(--metal-edge); box-shadow:inset 0 2px 0 rgba(255,255,255,.85),inset 0 -3px 0 rgba(0,0,0,.18),var(--drop-lg)}
-.device::before{content:""; position:absolute; top:2px; left:26px; width:6px; height:6px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#fff,var(--purple) 55%,#3a1380); box-shadow:0 0 6px var(--purple)}
 .device::after{content:""; position:absolute; bottom:2px; right:28px; width:40px; height:6px; opacity:.55; background:radial-gradient(circle,var(--line) 1.2px,transparent 1.7px) 0 0/8px 6px}
 .screen-in{border-radius:22px; background:var(--screen); box-shadow:var(--inset); overflow:hidden}
 .chip{display:inline-block; font:500 .85rem var(--font-pixel); letter-spacing:.06em; text-transform:uppercase; padding:.3rem .75rem; border:2px solid var(--line); background:var(--chip-bg); color:var(--fg); border-radius:999px}
@@ -163,7 +162,7 @@ html.colr[data-theme="dark"] .hero h1,:root.colr[data-theme="dark"] .hero h1{fon
 .cd.playing .cd-vid{opacity:1}
 .cd-ring{opacity:.5; position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none; overflow:visible; animation:spin 130s linear infinite}
 .cd-ring text{font:600 2.6px var(--font-pixel); fill:var(--fg)}
-.cd-ring polygon{fill:var(--fg)}
+.cd-ring polygon,.cd-ring path{fill:var(--fg)}
 .cd-vid video,.cd-vid canvas{display:block; width:100%; height:100%; object-fit:cover}
 .cd-spin{background:conic-gradient(from 0deg,#f7f8ff,#c9b8ff,#9fe9ff,#ffd9f6,#f7f8ff,#b9c0e0,#d9c6ff,#a8f0ff,#f7f8ff); animation:spin 16s linear infinite reverse}
 .cd-gloss{background:
@@ -709,6 +708,7 @@ html[data-motion="on"] .labels.pan-anim .lbl{transition:left .42s cubic-bezier(.
 #viewer:has(#vPrev:not([hidden])) #vTitle{padding-right:10.6rem}
 @media (max-width:520px){.vbar{height:52px; gap:.4rem; padding:0 .5rem 0 .9rem} #viewer .x{width:40px; height:40px} #viewer .cap button{width:42px; height:34px}}
 /* previous / next share one silver capsule, built like the theme toggles; close is a purple bevelled button like .btn */
+.vscroll:focus{outline:none}
 .cap{position:relative; display:inline-flex; border:3px solid transparent; border-radius:999px; background:var(--plate-bg) padding-box,var(--bevel) border-box; box-shadow:var(--drop); overflow:hidden}
 .cap:not(:has(button:not([hidden]))){display:none}
 .cap button{position:relative; display:grid; place-items:center; width:46px; height:38px; padding:0; border:0; background:transparent; color:var(--purple); cursor:pointer; transition:color .2s}
@@ -828,6 +828,7 @@ html[data-motion="on"] #swMotion button[data-v="on"] svg{animation:twink 2.2s ea
 /* full screen: the Work window fills the display (or the whole browser window where the browser refuses real full screen) */
 .work-dev.fs{box-sizing:border-box; width:100vw; height:100vh; max-width:none; margin:0; border-radius:0; overflow:auto; display:flex; flex-direction:column}
 .work-dev.fs.fs-fake{position:fixed; inset:0; z-index:1000; width:auto; height:auto}
+:root.noworld #swView{display:none}   /* phones: no switch, the list is the only view */
 .work-dev.fs .head .seg{display:none}   /* in full screen the map is the only view */
 .work-dev.fs #worldView:not([hidden]){flex:1; display:flex; flex-direction:column; min-height:0}
 .work-dev.fs .world-in{flex:1; display:flex; flex-direction:column; min-height:0}
@@ -888,7 +889,7 @@ html.fs-on{overflow:hidden}
 <main id="top">
   <section class="hero" aria-labelledby="name">
     <button type="button" class="cd" id="cd" aria-label="Showreel (coming soon)">
-      <span class="cd-disc" aria-hidden="true"><span class="cd-spin"></span><span class="cd-vid"></span><span class="cd-gloss"></span><span class="cd-hub"></span><svg class="cd-ring" viewBox="0 0 100 100"><defs><path id="ringp" d="M50 3a47 47 0 1 0 0 94a47 47 0 1 0 0-94"/></defs><text><textPath href="#ringp" startOffset="10.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="30.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="50.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="70.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="90.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(50.00 3.95) rotate(180.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(6.20 35.77) rotate(108.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(22.93 87.26) rotate(36.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(77.07 87.26) rotate(-36.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(93.80 35.77) rotate(-108.0)"/></svg></span>
+      <span class="cd-disc" aria-hidden="true"><span class="cd-spin"></span><span class="cd-vid"></span><span class="cd-gloss"></span><span class="cd-hub"></span><svg class="cd-ring" viewBox="0 0 100 100"><defs><path id="ringp" d="M50 3a47 47 0 1 0 0 94a47 47 0 1 0 0-94"/></defs><text><textPath href="#ringp" startOffset="10.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="30.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="50.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="70.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="90.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><path transform="translate(50.00 3.95) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(6.20 35.77) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(22.93 87.26) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(77.07 87.26) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(93.80 35.77) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/></svg></span>
     </button>
     <div class="hero-txt wrap">
       <h1 id="name">Hebeverse</h1>
@@ -900,7 +901,7 @@ html.fs-on{overflow:hidden}
     <div class="device work-dev">
     <div class="head">
       <h2 id="work-h">Work</h2>
-      <div class="seg" role="group" aria-label="Choose a layout for the work">
+      <div class="seg" id="swView" role="group" aria-label="Choose a layout for the work">
         <button type="button" data-view="world" aria-pressed="true" aria-label="World view" title="World view"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
         <button type="button" data-view="list" aria-pressed="false" aria-label="List view" title="List view"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="4.5" cy="6" r="1.4" fill="currentColor"/><circle cx="4.5" cy="12" r="1.4" fill="currentColor"/><circle cx="4.5" cy="18" r="1.4" fill="currentColor"/></svg></button>
       </div>
@@ -985,7 +986,6 @@ html.fs-on{overflow:hidden}
     <div class="vnav">
       <span class="sp"></span>
       <button type="button" class="btn" id="vProcess" hidden>See the process</button>
-      <a class="btn ghost" id="vLink" href="#" target="_blank" rel="noopener" hidden>Watch in a new tab</a>
     </div>
   </div>
 </dialog>
@@ -1091,10 +1091,7 @@ const root = document.documentElement;
 const $ = (s, r) => (r || document).querySelector(s);
 const el = (tag, cls, text) => { const n = document.createElement(tag); if(cls) n.className = cls; if(text != null) n.textContent = text; return n; };
 const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const store = {
-  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
-  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
-};
+const store = { get(){ return null; }, set(){} };   // nothing is saved between visits: every visit starts from the defaults (light, motion on, the view for the device)
 PROJECTS.forEach(p => { p.id = 'project-' + (p.slug || slug(p.title)); });
 const toneOf = i => ((PROJECTS[i].tone != null ? PROJECTS[i].tone : i) % TONES.length + TONES.length) % TONES.length;
 const setTone = (node, t) => { node.style.setProperty('--t1', TONES[t][0]); node.style.setProperty('--t2', TONES[t][1]); node.style.setProperty('--t3', TONES[t][2]); };
@@ -1151,14 +1148,14 @@ const swTheme = $('#swTheme'), swMotion = $('#swMotion');
 function curTheme(){ const t = root.getAttribute('data-theme'); return (t === 'dark' || t === 'light') ? t : (mqDark.matches ? 'dark' : 'light'); }
 function syncTheme(){ const t = curTheme(); swTheme.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === t))); sparkle.recolor(); }
 const savedTheme = store.get('hv-theme');
-if(savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme);
+root.setAttribute('data-theme', 'light');   // always starts light
 function vt(fn){ if(document.startViewTransition && motion === 'on' && !mqReduce.matches) document.startViewTransition(fn); else fn(); }   // soft cross-fade of the whole page
 swTheme.addEventListener('click', () => { const n = curTheme() === 'dark' ? 'light' : 'dark'; store.set('hv-theme', n); vt(() => { root.setAttribute('data-theme', n); syncTheme(); }); });
 if(mqDark.addEventListener) mqDark.addEventListener('change', syncTheme);
 new MutationObserver(syncTheme).observe(root, { attributes:true, attributeFilter:['data-theme'] });
 
 let motion = store.get('hv-motion');
-if(motion !== 'on' && motion !== 'off') motion = mqReduce.matches ? 'off' : 'on';
+motion = 'on';   // always starts with motion on
 function applyMotion(){ root.setAttribute('data-motion', motion); swMotion.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === motion))); sparkle.setMotion(motion === 'on'); }
 swMotion.addEventListener('click', () => { motion = motion === 'on' ? 'off' : 'on'; store.set('hv-motion', motion); applyMotion(); });
 
@@ -1468,7 +1465,9 @@ worldWrap.addEventListener('focusin', e => {
 });
 const workDev = $('.work-dev');
 let editing = false, frame = null, lastLayout = { isl: [], decos: [] }, handleEls = [];
+let worldBuilt = false;   // the world is only built where it is allowed (see mqNoWorld)
 function layoutWorld(){
+  if(!worldBuilt) return;
   const n = PROJECTS.length, avail = worldWrap.clientWidth; if(!n || !avail) return;
   const TILT = 58, ct = Math.cos(TILT * Math.PI / 180), sn = Math.sin(TILT * Math.PI / 180), k = 0.7071, P = 205;
   /* island positions: the ones written in the project list, otherwise a scattered automatic layout */
@@ -1608,7 +1607,7 @@ function placeHandles(){
   handleLayer.querySelectorAll('.gp').forEach(g => { const [x, y] = ((c, r) => { const f = frame; const px = c * f.P, py = r * f.P; return [f.cx + f.s * (px - py) * f.k, f.cy + f.s * ((px + py) * f.k * f.ct)]; })(+g.dataset.c, +g.dataset.r); g.style.left = x + 'px'; g.style.top = y + 'px'; });
 }
 function saveLayout(){
-  try { localStorage.setItem('hv-layout', JSON.stringify({ n:PROJECTS.length, cells:PROJECTS.map(p => p.cell), decos:SITE.decos })); } catch(e){}
+  /* layouts are not saved in the browser */
 }
 function startEditing(){
   if(!Array.isArray(SITE.decos) || !SITE.decos.length) SITE.decos = lastLayout.decos.map(d => ({ shape:d.shape, size:d.size, at:d.at.slice() }));
@@ -1627,7 +1626,6 @@ $('#lbEdit').addEventListener('click', startEditing);
 $('#lbDone').addEventListener('click', () => { stopEditing(); $('#lbEdit').focus(); });
 $('#lbReset').addEventListener('click', () => {
   PROJECTS.forEach(p => { delete p.cell; }); SITE.decos = [];
-  try { localStorage.removeItem('hv-layout'); } catch(e){}
   handleEls = []; layoutWorld(); startEditing();
 });
 $('#lbCopy').addEventListener('click', () => {
@@ -1641,21 +1639,12 @@ $('#lbCopy').addEventListener('click', () => {
 });
 (function(){   // the helper only shows when the address ends in ?layout
   const on = /[?&]layout\b/.test(location.search);   // hidden unless the address ends in ?layout lbar.hidden = !on; if(!on) return;
-  try {   // restore an arrangement made earlier in this browser
-    const sv = JSON.parse(localStorage.getItem('hv-layout') || 'null');
-    if(sv && sv.n === PROJECTS.length && sv.cells.every(Array.isArray)){ PROJECTS.forEach((p, i) => p.cell = sv.cells[i]); if(Array.isArray(sv.decos) && sv.decos.length) SITE.decos = sv.decos; }
-  } catch(e){}
 })();
 /* full screen button: real full screen where the browser allows it, otherwise fill the browser window */
 const fsBtn = el('button','cbtn fsbtn'); fsBtn.type = 'button'; fsBtn.id = 'fsBtn'; fsBtn.setAttribute('aria-pressed','false'); fsBtn.setAttribute('aria-label','Full screen'); fsBtn.title = 'Full screen';
 fsBtn.innerHTML = '<svg class="i-expand" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-shrink" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>'; worldWrap.append(fsBtn);
 ['pointerdown','touchstart'].forEach(t => fsBtn.addEventListener(t, e => e.stopPropagation()));
-let vidFs = false;   // true while a video inside a pop-up is full screen on top of the full screen work window
 function afterFs(){
-  const fe = document.fullscreenElement;
-  if(fe && fe !== workDev) vidFs = true;
-  else if(vidFs && fe === workDev && document.querySelector('dialog[open]')){ vidFs = false; document.exitFullscreen().catch(() => {}); return; }   // leaving the video's full screen also leaves the work window's, so nothing stays stuck
-  else vidFs = false;
   const on = !!document.fullscreenElement && document.fullscreenElement === workDev || workDev.classList.contains('fs-fake');
   workDev.classList.toggle('fs', on); document.documentElement.classList.toggle('fs-on', on);
   fsBtn.setAttribute('aria-pressed', String(on)); const t = on ? 'Exit full screen' : 'Full screen'; fsBtn.setAttribute('aria-label', t); fsBtn.title = t;
@@ -1705,19 +1694,29 @@ function renderList(){
     if(innerHeight + scrollY >= document.documentElement.scrollHeight - 6) n = links.length - 1;   // at the very bottom the last section counts, even if it is too short to reach the top
     if(lock >= 0) n = lock;
     if(n !== cur){ cur = n; links.forEach((a, i) => { a.classList.toggle('on', i === n); if(i === n) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); }); nav.classList.toggle('lit', n >= 0); if(n >= 0) place(); } };
-  const queue = () => { if(!raf) raf = requestAnimationFrame(spy); if(lock >= 0){ clearTimeout(lt); lt = setTimeout(() => { lock = -1; queue(); }, 200); } };
-  links.forEach((a, i) => a.addEventListener('click', () => { lock = i; clearTimeout(lt); lt = setTimeout(() => { lock = -1; queue(); }, 600); queue(); }));
+  const queue = () => { if(!raf) raf = requestAnimationFrame(spy); };
+  links.forEach((a, i) => a.addEventListener('click', () => {
+    lock = i; let last = scrollY, still = 0; const t0 = performance.now();
+    const tick = () => { if(lock !== i) return; if(scrollY === last) still++; else { still = 0; last = scrollY; } if(still > 14 || performance.now() - t0 > 2500){ lock = -1; queue(); return; } requestAnimationFrame(tick); };   // released once the page has stopped moving
+    requestAnimationFrame(tick); queue(); }));
   addEventListener('scroll', queue, { passive:true }); addEventListener('resize', () => { place(); queue(); }); spy(); }
 const worldView = $('#worldView'), segBtns = document.querySelectorAll('.seg button[data-view]');
 let view = null;   // the starting view depends on the device only: list on phones, world on bigger screens (not remembered)
 const mqPhone = window.matchMedia('(max-width: 700px)');
-if(view !== 'world' && view !== 'list') view = (mqPhone.matches || motion === 'off') ? 'list' : 'world';
+/* the 3D world is too heavy for phones (it crashed iPhones), so touch screens up to 1000px wide, and any very narrow window, get the list only */
+const mqNoWorld = window.matchMedia('(max-width: 700px), (pointer: coarse) and (max-width: 1000px)');
+function ensureWorld(){ if(!worldBuilt){ worldBuilt = true; renderWorld(); } }
+view = (mqNoWorld.matches || motion === 'off') ? 'list' : 'world';
 function setView(v, save){
+  if(v === 'world' && mqNoWorld.matches) v = 'list';
+  if(v === 'world') ensureWorld();
   view = v;
+  root.classList.toggle('noworld', mqNoWorld.matches);
   worldView.hidden = v !== 'world'; listView.hidden = v !== 'list'; peekHide();
   segBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
   if(v === 'world') layoutWorld();
 }
+mqNoWorld.addEventListener('change', () => setView(view, false));
 segBtns[0].parentElement.addEventListener('click', () => { const n = view === 'world' ? 'list' : 'world'; vt(() => setView(n, true)); });   // pressing anywhere on the switch flips it
 
 /* ---------- screens, pop-up, process view ---------- */
@@ -1807,12 +1806,17 @@ function fillViewer(item, label, reel){
   const facts = $('#vFacts'); facts.textContent = '';
   if(!reel) [['Role', item.role], ['Tools', item.tools]].forEach(f => { if(f[1]){ const d = el('div'), dd = el('dd', null, f[0] === 'Tools' ? null : f[1]); if(f[0] === 'Tools'){ dd.className = 'vtools'; f[1].split(',').map(t => t.trim()).filter(Boolean).forEach(t => dd.append(el('span', 'chip', t))); } d.append(el('dt',null,f[0]), dd); facts.append(d); } });
   const scr = $('#vScreen'), nu = item.photos ? makePhotoBoard(item) : makeScreen(item.video, item.title); scr.replaceWith(nu); nu.id = 'vScreen';
-  const link = $('#vLink'); if(item.video){ link.href = item.video; link.hidden = false; } else link.hidden = true;
   $('#vPrev').hidden = $('#vNext').hidden = !!reel; $('#vProcess').hidden = !!reel || !item.process;
 }
 function setHash(id){ try { history.replaceState(null, '', '#' + id); } catch(e){} }
 function clearHash(){ try { if(/^#(project-|showreel)/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search); } catch(e){} }
-function showDialog(d){ if(!d.open){ try { d.showModal(); } catch(e){ d.setAttribute('open',''); } } }
+let fsRestore = false;   // the work window was full screen when a pop-up opened
+function showDialog(d){
+  if(document.fullscreenElement === workDev && !document.querySelector('dialog[open]')){ fsRestore = true; document.exitFullscreen().catch(() => {}); }   // a video can only leave full screen cleanly when nothing else is full screen underneath it
+  if(!d.open){ try { d.showModal(); } catch(e){ d.setAttribute('open',''); } }
+  const sc = d.querySelector('.vscroll'); if(sc){ sc.tabIndex = -1; sc.focus({ preventScroll:true }); }   // start focus on the content so the first arrow button is not lit up
+}
+document.addEventListener('close', () => { if(fsRestore && !document.querySelector('dialog[open]')){ fsRestore = false; try { const p = workDev.requestFullscreen(); if(p && p.catch) p.catch(() => {}); } catch(e){} } }, true);   // closing the pop-up puts the work window back in full screen
 function openProject(i, from){
   cur = (i + PROJECTS.length) % PROJECTS.length; mode = 'project'; if(from) opener = from;
   const p = PROJECTS[cur];
@@ -1834,6 +1838,14 @@ else { $('#cd').classList.add('live'); document.querySelectorAll('#cd .cd-ring t
 $('#cd').addEventListener('click', e => { if(REEL_READY) openReel(e.currentTarget); });
 /* ring text: stretch each line to its target length by letter-spacing (measured, so it looks the same in every browser) */
 function fitRing(){ document.querySelectorAll('#cd .cd-ring textPath').forEach(t => { try { t.style.letterSpacing = '0px'; const n = t.textContent.length, L = t.getComputedTextLength(); t.style.letterSpacing = ((+t.dataset.len - L) / n).toFixed(3) + 'px'; } catch(e){} }); }
+function fitTitle(){   // on phones the big title is sized to be as wide as the line under it
+  const h = $('#name'), t = $('#tagline'); h.style.fontSize = '';
+  if(!mqPhoneT.matches) return;
+  const w = n => { const r = document.createRange(); r.selectNodeContents(n); return r.getBoundingClientRect().width; };
+  const f = parseFloat(getComputedStyle(h).fontSize), hw = w(h), tw = w(t); if(hw > 0 && tw > 0) h.style.fontSize = Math.min(f * tw / hw, 96).toFixed(1) + 'px';
+}
+const mqPhoneT = window.matchMedia('(max-width: 700px)');
+fitTitle(); addEventListener('resize', fitTitle); if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitle);
 fitRing(); if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitRing);
 /* hovering (or keyboard-focusing) the disc plays a silent preview on its surface */
 (function(){
@@ -1907,7 +1919,7 @@ function openFromHash(){
 window.addEventListener('hashchange', openFromHash);
 
 /* ---------- start ---------- */
-renderWorld(); renderList();
+renderList();
 sparkle.init(); applyMotion(); syncTheme();
 setView(view, false);
 requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('ready')));
