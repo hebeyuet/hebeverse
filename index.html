@@ -409,7 +409,6 @@ dialog.big{width:min(72rem,calc(100% - 24px)); height:calc(100% - 24px); max-hei
 #viewer.big .vscroll{height:auto; max-height:calc(100dvh - 44px)}
 #viewer.big #vScreen{width:100%}
 dialog::backdrop{background:rgba(18,10,38,.68)}
-dialog::before{content:""; position:absolute; top:2px; left:26px; width:6px; height:6px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#fff,var(--purple) 55%,#3a1380); box-shadow:0 0 6px var(--purple)}
 .vscroll{max-height:calc(100dvh - 32px - 10px - 56px - 4px); overflow:auto; padding:1.1rem 1.4rem 1.5rem; border-radius:22px; background:var(--screen); box-shadow:var(--inset)}
 dialog.big .vscroll{height:100%; max-height:none}
 .vbar{display:flex; gap:.55rem; align-items:center; justify-content:flex-end; height:56px; padding:0 .7rem 0 1.2rem; flex:none}   /* the pop-up's top bezel is a title bar that holds the controls */
@@ -496,7 +495,7 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
 /* ---------- about: loose sticker layout ---------- */
 .about{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:1.4rem 1.2rem; align-items:start; padding-block:.5rem 1.5rem}
 .stk{position:relative; border:3px solid transparent; border-radius:22px; background:var(--plate-bg) padding-box,var(--bevel) border-box; box-shadow:var(--drop); padding:1rem 1.15rem; transform:rotate(var(--r,0deg)) translate(var(--x,0),var(--y,0)); transition:transform .3s}
-html[data-motion="on"] .stk:hover{transform:rotate(0deg) translate(var(--x,0),calc(var(--y,0) - 6px)); z-index:3}
+@media (hover:hover) and (pointer:fine){html[data-motion="on"] .stk:hover{transform:rotate(0deg) translate(var(--x,0),calc(var(--y,0) - 6px)); z-index:3}}
 .about-intro.stk{grid-column:1/7; grid-row:1; --r:-1.2deg; padding:1.6rem 1.8rem; max-width:none; z-index:1}
 .about-intro.stk p:last-child{margin-bottom:0}
 .inv.stk,.lang-st.stk{justify-self:start; width:max-content; max-width:100%}
@@ -706,6 +705,7 @@ html[data-motion="on"] .labels.pan-anim .lbl{transition:left .42s cubic-bezier(.
 .world-wrap.canpan{cursor:grab} .world-wrap.panning,.world-wrap.panning .island,.world-wrap.panning .lbl{cursor:grabbing}
 #hudMeta{white-space:pre-line}
 #viewer:has(#vPrev:not([hidden])) #vTitle{padding-right:10.6rem}
+@media (max-width:700px){#viewer:has(#vPrev:not([hidden])) #vTitle{padding-right:0} .hero .role{margin-top:.35rem}}   /* phones: the title may use the full width; the subheading sits a little higher */
 @media (max-width:520px){.vbar{height:52px; gap:.4rem; padding:0 .5rem 0 .9rem} #viewer .x{width:40px; height:40px} #viewer .cap button{width:42px; height:34px}}
 /* previous / next share one silver capsule, built like the theme toggles; close is a purple bevelled button like .btn */
 .vscroll:focus{outline:none}
@@ -725,7 +725,6 @@ html[data-motion="on"] .labels.pan-anim .lbl{transition:left .42s cubic-bezier(.
 html[data-motion="off"] .x,html[data-motion="off"] .x svg,html[data-motion="off"] .cap button,html[data-motion="off"] .cap button::before{transition:none}
 /* contact: a small silver window, like the project pop-ups */
 .cwin{padding:0 10px 10px; border:1.5px solid var(--metal-edge); border-radius:30px; background:var(--bezel); box-shadow:0 22px 40px -22px rgba(10,0,40,.55),inset 0 2px 0 rgba(255,255,255,.85),inset 0 -3px 0 rgba(0,0,0,.18); position:relative}
-.cwin::before{content:""; position:absolute; top:2px; left:26px; width:6px; height:6px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#fff,var(--purple) 55%,#3a1380); box-shadow:0 0 6px var(--purple)}
 .cwin .vbar{height:48px}
 .cscreen{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; padding:.9rem 1rem; border-radius:22px; background:var(--screen); box-shadow:var(--inset)}
 .cwin .big{overflow-wrap:anywhere; min-width:0}
@@ -889,7 +888,7 @@ html.fs-on{overflow:hidden}
 <main id="top">
   <section class="hero" aria-labelledby="name">
     <button type="button" class="cd" id="cd" aria-label="Showreel (coming soon)">
-      <span class="cd-disc" aria-hidden="true"><span class="cd-spin"></span><span class="cd-vid"></span><span class="cd-gloss"></span><span class="cd-hub"></span><svg class="cd-ring" viewBox="0 0 100 100"><defs><path id="ringp" d="M50 3a47 47 0 1 0 0 94a47 47 0 1 0 0-94"/></defs><text><textPath href="#ringp" startOffset="10.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="30.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="50.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="70.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="90.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><path transform="translate(50.00 3.95) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(6.20 35.77) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(22.93 87.26) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(77.07 87.26) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(93.80 35.77) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/></svg></span>
+      <span class="cd-disc" aria-hidden="true"><span class="cd-spin"></span><span class="cd-vid"></span><span class="cd-gloss"></span><span class="cd-hub"></span><svg class="cd-ring" viewBox="0 0 100 100"><defs><path id="ringp" d="M50 3a47 47 0 1 0 0 94a47 47 0 1 0 0-94"/></defs><text><textPath href="#ringp" startOffset="10.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="30.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="50.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="70.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="90.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><path transform="translate(50.00 3.95) rotate(180) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(6.20 35.77) rotate(108) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(22.93 87.26) rotate(36) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(77.07 87.26) rotate(-36) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/><path transform="translate(93.80 35.77) rotate(-108) scale(.036) translate(-50 -50)" d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z"/></svg></span>
     </button>
     <div class="hero-txt wrap">
       <h1 id="name">Hebeverse</h1>
@@ -915,7 +914,7 @@ html.fs-on{overflow:hidden}
       <div class="world-in"><div class="world-wrap" id="worldWrap"><div class="pan" id="panBack"><div id="stage"></div></div></div>
       <div class="lcd" aria-hidden="true">
         <span class="t" id="hudTitle">Tap to open a project</span>
-        <span class="m" id="hudMeta">Drag to look around (two fingers on a phone). Pinch or use + / − to zoom.</span>
+        <span class="m" id="hudMeta">Drag to look around</span>
       </div></div>
       <div class="lbar" id="lbar" hidden>
         <button type="button" class="btn" id="lbEdit">Arrange layout</button>
@@ -1053,7 +1052,7 @@ const PROJECTS = [
   { title:"Everything’s Connected", year:"2025", type:"Experimental Short Film", role:"Solo Creator", tools:"Canon EOS Rebel T7 DSLR, Projector, DaVinci Resolve", blurb:"This video project reimagines the aesthetics and language of consumer culture through the lens of Lemon Demon’s song Redesign Your Logo and the infamous 2009 Pepsi design PDF by ARNELL GROUP that inspired it.", video:"https://www.youtube.com/watch?v=ZxAFrU_C3NQ", thumb:"img/thumbs/everythings-connected-thumb.jpg", preview:"", shape:"can", tone:3, featured:true },
   { title:"New Eden", year:"2026", type:"Animatic", role:"Producer, Art and Video Editing", tools:"Clip Studio Paint, MediBang Paint Pro, DaVinci Resolve", blurb:"New Eden is an ongoing animatic video project that visualizes a fictional, fantastical city that appears to be a utopia. Beneath the surface, however, it is a place marked by hidden wounds of colonization.", video:"https://www.youtube.com/watch?v=EwU_T72pR5Q", thumb:"img/thumbs/new-eden-thumb.jpg", preview:"", shape:"garden", tone:10, status:"wip" },
   { title:"Velvet", year:"2026", type:"Animation Music Video", role:"Animation, Visual Development", tools:"Clip Studio Paint, MediBang Paint Pro, CapCut", blurb:"I worked on the official animated music video of the song Velvet by Koven Wei and SUGAR. Specifically, I made decisions on the initial aesthetics, storyboarded and polished the bridge section, rotoscoped the dance sequence for the final chorus, and assisted in the editing process. *Note: I worked on this project under the alias \"River Shroom\".", video:"https://www.youtube.com/watch?v=97PXB9gSfWk", thumb:"img/thumbs/velvet-thumb.jpg", preview:"", shape:"dancers", tone:4 },
-  { title:"Orbiting the Imaginary", year:"2025", type:"Photographic Series", role:"Photographer", tools:"Canon EOS Rebel T7 DSLR, Adobe Photoshop", blurb:"This project explores the ways photography can construct a sense of outer space without ever documenting the cosmos directly. Across a series of images, I use everyday objects, specifically Dungeons & Dragons dice, to evoke the vastness, ambiguity, and imaginative potential associated with the universe. Rather than aiming for literal representation, the work seeks to visualize the feeling of outer space: disorientation, expansion, and the thrill of encountering the unknown.", photos:[{src:"img/orb/orbiting-the-imaginary-01.jpg",ar:"9/16"},{src:"img/orb/orbiting-the-imaginary-02.jpg",ar:"2/3"},{src:"img/orb/orbiting-the-imaginary-03.jpg",ar:"2/3"},{src:"img/orb/orbiting-the-imaginary-04.jpg",ar:"16/9"},{src:"img/orb/orbiting-the-imaginary-05.jpg",ar:"16/9"},{src:"img/orb/orbiting-the-imaginary-06.jpg",ar:"2/3"},{src:"img/orb/orbiting-the-imaginary-07.jpg",ar:"3/2"},{src:"img/orb/orbiting-the-imaginary-08.jpg",ar:"9/16"}], video:"", thumb:"img/thumbs/orbiting-the-imaginary-thumb.jpg", preview:"", shape:"planet", tone:6 },
+  { title:"Orbiting the Imaginary", year:"2025", type:"Photographic Series", role:"Photographer, Editor", tools:"Canon EOS Rebel T7 DSLR, Adobe Photoshop", blurb:"This project explores the ways photography can construct a sense of outer space without ever documenting the cosmos directly. Across a series of images, I use everyday objects, specifically Dungeons & Dragons dice, to evoke the vastness, ambiguity, and imaginative potential associated with the universe. Rather than aiming for literal representation, the work seeks to visualize the feeling of outer space: disorientation, expansion, and the thrill of encountering the unknown.", photos:[{src:"img/orb/orbiting-the-imaginary-01.jpg",ar:"9/16"},{src:"img/orb/orbiting-the-imaginary-02.jpg",ar:"2/3"},{src:"img/orb/orbiting-the-imaginary-03.jpg",ar:"2/3"},{src:"img/orb/orbiting-the-imaginary-04.jpg",ar:"16/9"},{src:"img/orb/orbiting-the-imaginary-05.jpg",ar:"16/9"},{src:"img/orb/orbiting-the-imaginary-06.jpg",ar:"2/3"},{src:"img/orb/orbiting-the-imaginary-07.jpg",ar:"3/2"},{src:"img/orb/orbiting-the-imaginary-08.jpg",ar:"9/16"}], video:"", thumb:"img/thumbs/orbiting-the-imaginary-thumb.jpg", preview:"", shape:"planet", tone:6 },
   { title:"Beyond the Stars", year:"2026", type:"Animation", role:"Solo Creator, Animator", tools:"Autodesk Maya, DaVinci Resolve", blurb:"A fan animation of my favorite video game character Kirby.", video:"https://vimeo.com/1245005372", thumb:"img/thumbs/beyond-the-stars-thumb.jpg", preview:"", shape:"star", tone:11 }
 ];
 /* ============================================================ */
@@ -1645,6 +1644,7 @@ const fsBtn = el('button','cbtn fsbtn'); fsBtn.type = 'button'; fsBtn.id = 'fsBt
 fsBtn.innerHTML = '<svg class="i-expand" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-shrink" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>'; worldWrap.append(fsBtn);
 ['pointerdown','touchstart'].forEach(t => fsBtn.addEventListener(t, e => e.stopPropagation()));
 function afterFs(){
+  setTimeout(homeDialogs, 0);
   const on = !!document.fullscreenElement && document.fullscreenElement === workDev || workDev.classList.contains('fs-fake');
   workDev.classList.toggle('fs', on); document.documentElement.classList.toggle('fs-on', on);
   fsBtn.setAttribute('aria-pressed', String(on)); const t = on ? 'Exit full screen' : 'Full screen'; fsBtn.setAttribute('aria-label', t); fsBtn.title = t;
@@ -1765,7 +1765,7 @@ function openPhoto(ph, i, item){
     const d = el('dialog','pview'), x = el('button','cbtn pvclose'); d.setAttribute('aria-label','Photo'); x.type = 'button'; x.setAttribute('aria-label','Close photo'); x.innerHTML = X_ICON;
     x.addEventListener('click', () => d.close()); d.append(x, el('div','pvbox'));
     d.addEventListener('click', e => { if(e.target === d || e.target.classList.contains('pvbox')) d.close(); });
-    document.body.append(d); photoView = d;
+    (document.fullscreenElement === workDev ? workDev : document.body).append(d); photoView = d;
   }
   const box = $('.pvbox', photoView); box.textContent = '';
   if(ph.src){ const im = el('img'); im.src = ph.src; im.alt = ph.alt || (item.title + ', photo ' + (i + 1)); box.append(im); }
@@ -1810,13 +1810,17 @@ function fillViewer(item, label, reel){
 }
 function setHash(id){ try { history.replaceState(null, '', '#' + id); } catch(e){} }
 function clearHash(){ try { if(/^#(project-|showreel)/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search); } catch(e){} }
-let fsRestore = false;   // the work window was full screen when a pop-up opened
 function showDialog(d){
-  if(document.fullscreenElement === workDev && !document.querySelector('dialog[open]')){ fsRestore = true; document.exitFullscreen().catch(() => {}); }   // a video can only leave full screen cleanly when nothing else is full screen underneath it
   if(!d.open){ try { d.showModal(); } catch(e){ d.setAttribute('open',''); } }
   const sc = d.querySelector('.vscroll'); if(sc){ sc.tabIndex = -1; sc.focus({ preventScroll:true }); }   // start focus on the content so the first arrow button is not lit up
 }
-document.addEventListener('close', () => { if(fsRestore && !document.querySelector('dialog[open]')){ fsRestore = false; try { const p = workDev.requestFullscreen(); if(p && p.catch) p.catch(() => {}); } catch(e){} } }, true);   // closing the pop-up puts the work window back in full screen
+/* while the work window is full screen the pop-ups sit inside it, so a video's own full screen stacks and exits normally (no need to leave full screen) */
+function homeDialogs(){
+  if(document.querySelector('dialog[open]')) return;
+  const host = document.fullscreenElement === workDev ? workDev : document.body;
+  document.querySelectorAll('dialog').forEach(d => { if(d.parentNode !== host) host.append(d); });
+}
+document.addEventListener('close', homeDialogs, true);
 function openProject(i, from){
   cur = (i + PROJECTS.length) % PROJECTS.length; mode = 'project'; if(from) opener = from;
   const p = PROJECTS[cur];
