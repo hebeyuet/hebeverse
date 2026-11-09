@@ -8,9 +8,12 @@
 <style>:root{color-scheme:light; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)} img{max-width:100%} [hidden]{display:none!important}</style>
 <title>Hebe Yuet Cheuk</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<script>/* the big title is a colour font (COLRv1): load it only where it works, iPhones get a purple gradient title instead */
+try{ if(window.CSS && CSS.supports && CSS.supports('font-tech(color-COLRv1)')){ document.documentElement.classList.add('colr'); var l=document.createElement('link'); l.rel='stylesheet'; l.href='https://fonts.googleapis.com/css2?family=Nabla:EDPT,EHLT@0..200,0..24&display=swap'; document.head.appendChild(l); } }catch(e){}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Quicksand:wght@600&family=Jersey+25&family=Nabla:EDPT,EHLT@0..200,0..24&family=Outfit:wght@400;500;600&family=Pixelify+Sans:wght@500;700&family=Caveat:wght@500;700&family=Permanent+Marker&family=Playfair+Display:wght@900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Quicksand:wght@600&family=Jersey+25&family=Outfit:wght@400;500;600&family=Pixelify+Sans:wght@500;700&family=Caveat:wght@500;700&family=Permanent+Marker&family=Playfair+Display:wght@900&display=swap">
 <style>
 /* LAYOUT CONCEPT
    Y2K silver handheld devices. The work lives on a dark "screen" set into a big silver device:
@@ -140,10 +143,12 @@ a{color:var(--purple)}
 /* the big title uses Nabla, a colour font: its colours are set to the page palette (purple, lilac, silver, cyan) */
 @font-palette-values --hv{font-family:"Nabla"; override-colors:0 #6b3fd0,1 #8a5be6,2 #1fb5d6,3 #5a2fb8,4 #7c52dc,5 #9a73ea,6 #6a5fb0,7 #4b248f,8 #8a5be6,9 #1fb5d6,10 #6a5fb0,11 #5a2fb8}
 @font-palette-values --hvd{font-family:"Nabla"; override-colors:0 #b9a4f0,1 #cdbff5,2 #7cf0ff,3 #a592e0,4 #d6d3ea,5 #c3b5f2,6 #b4b9d0,7 #9d8ad8,8 #dcd6f3,9 #7cf0ff,10 #a9afc8,11 #a592e0}
-.hero h1{font-family:"Nabla","Jersey 25",system-ui,sans-serif; font-weight:400; font-palette:--hv; font-variation-settings:"EDPT" 80,"EHLT" 12; letter-spacing:0; font-size:clamp(2.8rem,11vw,8rem); line-height:1.05; max-width:100%; background:none; -webkit-text-fill-color:currentColor; color:#8a63e8; padding-bottom:0}
+.hero h1{font-family:"Jersey 25",system-ui,sans-serif; font-weight:400; letter-spacing:.02em; font-size:clamp(2.8rem,11vw,8rem); line-height:1.05; max-width:100%; padding-bottom:.08em; background:linear-gradient(180deg,#b58cff 0%,#7b3fe0 50%,#5a2fb8 100%); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent}   /* fallback title: purple gradient */
+html.colr .hero h1{font-family:"Nabla","Jersey 25",system-ui,sans-serif; letter-spacing:0; font-palette:--hv; font-variation-settings:"EDPT" 80,"EHLT" 12; background:none; -webkit-text-fill-color:currentColor; color:#8a63e8; padding-bottom:0}
 .role{margin:1rem 0 0; font:var(--display-weight) clamp(1.15rem,2.6vw,1.45rem)/1.2 var(--font-display); letter-spacing:.08em; color:var(--fg-soft)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero h1{font-palette:--hvd; color:#b9a4f0}}
-:root[data-theme="dark"] .hero h1{font-palette:--hvd; color:#b9a4f0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero h1{background:linear-gradient(180deg,#e2d6ff 0%,#b9a4f0 50%,#9d8ad8 100%); -webkit-background-clip:text; background-clip:text} :root.colr:not([data-theme="light"]) .hero h1{font-palette:--hvd; color:#b9a4f0; background:none}}
+:root[data-theme="dark"] .hero h1{background:linear-gradient(180deg,#e2d6ff 0%,#b9a4f0 50%,#9d8ad8 100%); -webkit-background-clip:text; background-clip:text}
+html.colr[data-theme="dark"] .hero h1,:root.colr[data-theme="dark"] .hero h1{font-palette:--hvd; color:#b9a4f0; background:none}
 .tags{display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0 0}
 .lede{margin:.8rem 0 0; max-width:34rem; color:var(--fg-soft); font-size:1.15rem}
 
@@ -170,6 +175,7 @@ a{color:var(--purple)}
 @keyframes cdshine{from{background-position:100% 0}to{background-position:-60% 0}}
 .cd-hub{position:absolute; left:50%; top:50%; width:27%; aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle,transparent 0 31%,rgba(255,255,255,.7) 32% 52%,rgba(185,192,222,.75) 53% 100%); box-shadow:inset 0 0 0 2px rgba(110,115,150,.55)}
 @keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:700px){.cd-spin{animation:none} .cd-disc::before{display:none}}   /* phones: keep the disc still, its big masked layer is too heavy to repaint every frame */
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* ---------- section heads ---------- */
@@ -882,7 +888,7 @@ html.fs-on{overflow:hidden}
 <main id="top">
   <section class="hero" aria-labelledby="name">
     <button type="button" class="cd" id="cd" aria-label="Showreel (coming soon)">
-      <span class="cd-disc" aria-hidden="true"><span class="cd-spin"></span><span class="cd-vid"></span><span class="cd-gloss"></span><span class="cd-hub"></span><svg class="cd-ring" viewBox="0 0 100 100"><defs><path id="ringp" d="M50 3a47 47 0 1 0 0 94a47 47 0 1 0 0-94"/></defs><text><textPath href="#ringp" startOffset="10.000%" text-anchor="middle" textLength="46" lengthAdjust="spacing">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="30.000%" text-anchor="middle" textLength="46" lengthAdjust="spacing">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="50.000%" text-anchor="middle" textLength="46" lengthAdjust="spacing">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="70.000%" text-anchor="middle" textLength="46" lengthAdjust="spacing">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="90.000%" text-anchor="middle" textLength="46" lengthAdjust="spacing">WELCOME TO THE HEBEVERSE</textPath></text><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(50.00 3.95) rotate(180.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(6.20 35.77) rotate(108.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(22.93 87.26) rotate(36.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(77.07 87.26) rotate(-36.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(93.80 35.77) rotate(-108.0)"/></svg></span>
+      <span class="cd-disc" aria-hidden="true"><span class="cd-spin"></span><span class="cd-vid"></span><span class="cd-gloss"></span><span class="cd-hub"></span><svg class="cd-ring" viewBox="0 0 100 100"><defs><path id="ringp" d="M50 3a47 47 0 1 0 0 94a47 47 0 1 0 0-94"/></defs><text><textPath href="#ringp" startOffset="10.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="30.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="50.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="70.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><text><textPath href="#ringp" startOffset="90.000%" text-anchor="middle" data-len="46">WELCOME TO THE HEBEVERSE</textPath></text><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(50.00 3.95) rotate(180.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(6.20 35.77) rotate(108.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(22.93 87.26) rotate(36.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(77.07 87.26) rotate(-36.0)"/><polygon points="-1,-1.1 -1,1.1 1.2,0" transform="translate(93.80 35.77) rotate(-108.0)"/></svg></span>
     </button>
     <div class="hero-txt wrap">
       <h1 id="name">Hebeverse</h1>
@@ -1703,11 +1709,11 @@ function renderList(){
   links.forEach((a, i) => a.addEventListener('click', () => { lock = i; clearTimeout(lt); lt = setTimeout(() => { lock = -1; queue(); }, 600); queue(); }));
   addEventListener('scroll', queue, { passive:true }); addEventListener('resize', () => { place(); queue(); }); spy(); }
 const worldView = $('#worldView'), segBtns = document.querySelectorAll('.seg button[data-view]');
-let view = store.get('hv-view');
+let view = null;   // the starting view depends on the device only: list on phones, world on bigger screens (not remembered)
 const mqPhone = window.matchMedia('(max-width: 700px)');
 if(view !== 'world' && view !== 'list') view = (mqPhone.matches || motion === 'off') ? 'list' : 'world';
 function setView(v, save){
-  view = v; if(save) store.set('hv-view', v);
+  view = v;
   worldView.hidden = v !== 'world'; listView.hidden = v !== 'list'; peekHide();
   segBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
   if(v === 'world') layoutWorld();
@@ -1824,8 +1830,11 @@ $('#vPrev').addEventListener('click', () => openProject(nextIn(-1)));
 $('#vNext').addEventListener('click', () => openProject(nextIn(1)));
 const REEL_READY = false;   // flip to true once the showreel is finished: the disc then opens its pop-up again
 if(!REEL_READY) $('#cd').style.cursor = 'default';
-else { $('#cd').classList.add('live'); document.querySelectorAll('#cd .cd-ring textPath').forEach(t => { t.textContent = 'PLAY SHOWREEL'; t.setAttribute('textLength', 36); }); }   // ring says HEBEVERSE until the reel is finished
+else { $('#cd').classList.add('live'); document.querySelectorAll('#cd .cd-ring textPath').forEach(t => { t.textContent = 'PLAY SHOWREEL'; t.dataset.len = 36; }); fitRing(); }   // ring says HEBEVERSE until the reel is finished
 $('#cd').addEventListener('click', e => { if(REEL_READY) openReel(e.currentTarget); });
+/* ring text: stretch each line to its target length by letter-spacing (measured, so it looks the same in every browser) */
+function fitRing(){ document.querySelectorAll('#cd .cd-ring textPath').forEach(t => { try { t.style.letterSpacing = '0px'; const n = t.textContent.length, L = t.getComputedTextLength(); t.style.letterSpacing = ((+t.dataset.len - L) / n).toFixed(3) + 'px'; } catch(e){} }); }
+fitRing(); if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitRing);
 /* hovering (or keyboard-focusing) the disc plays a silent preview on its surface */
 (function(){
   /* the disc catches the light now and then, at random: different gaps, angle and strength each time; the sweep itself always takes the same slow 4.6s */
