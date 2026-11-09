@@ -1,3 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Hebe Yuet Cheuk: film, animation and photography.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2Z' fill='%236b2fd6'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)} img{max-width:100%} [hidden]{display:none!important}</style>
 <title>Hebe Yuet Cheuk</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -561,6 +569,7 @@ html[data-motion="on"] .pol:hover{transform:rotate(0deg) translateY(-6px)}
 :root .about-intro .k1{background-image:linear-gradient(180deg,#b58cff,#6a2bd6 55%,#9b6dff)}
 :root .about-intro .k7{background-image:linear-gradient(180deg,#ff8ae6,#c23bd8 55%,#8f5cff)}
 .wtape{position:absolute; width:7.6rem; height:2.2rem; background:rgba(185,160,255,.62); z-index:3; pointer-events:none; clip-path:polygon(0 0,4% 18%,0 36%,4% 54%,0 72%,4% 90%,0 100%,100% 100%,96% 82%,100% 64%,96% 46%,100% 28%,96% 10%,100% 0)}
+@media (max-width:700px){#about{overflow-x:clip}}   /* on phones the tape on the intro card must never push the page wider than the screen */
 .wtape.t1{left:-2.2rem; top:.5rem; transform:rotate(-38deg)}
 .wtape.t2{right:-2.4rem; bottom:.6rem; transform:rotate(-36deg); background:rgba(185,160,255,.62)}
 /* post-it skills */
@@ -837,6 +846,8 @@ html.fs-on{overflow:hidden}
 @media (hover:none){.parrow{opacity:.42}}
 @media (max-width:700px){.parrow{width:38px; height:38px} .parrow.pu{top:-7px} .parrow.pd{bottom:-7px} .parrow.pl{left:-7px} .parrow.pr{right:-7px} .parrow.pu,.parrow.pd{margin-left:-19px} .parrow.pl,.parrow.pr{margin-top:-19px}}
 </style>
+</head>
+<body>
 
 <a class="skip" href="#work">Skip to projects</a>
 <canvas id="sparkle" aria-hidden="true"></canvas>
@@ -1633,7 +1644,12 @@ $('#lbCopy').addEventListener('click', () => {
 const fsBtn = el('button','cbtn fsbtn'); fsBtn.type = 'button'; fsBtn.id = 'fsBtn'; fsBtn.setAttribute('aria-pressed','false'); fsBtn.setAttribute('aria-label','Full screen'); fsBtn.title = 'Full screen';
 fsBtn.innerHTML = '<svg class="i-expand" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-shrink" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>'; worldWrap.append(fsBtn);
 ['pointerdown','touchstart'].forEach(t => fsBtn.addEventListener(t, e => e.stopPropagation()));
+let vidFs = false;   // true while a video inside a pop-up is full screen on top of the full screen work window
 function afterFs(){
+  const fe = document.fullscreenElement;
+  if(fe && fe !== workDev) vidFs = true;
+  else if(vidFs && fe === workDev && document.querySelector('dialog[open]')){ vidFs = false; document.exitFullscreen().catch(() => {}); return; }   // leaving the video's full screen also leaves the work window's, so nothing stays stuck
+  else vidFs = false;
   const on = !!document.fullscreenElement && document.fullscreenElement === workDev || workDev.classList.contains('fs-fake');
   workDev.classList.toggle('fs', on); document.documentElement.classList.toggle('fs-on', on);
   fsBtn.setAttribute('aria-pressed', String(on)); const t = on ? 'Exit full screen' : 'Full screen'; fsBtn.setAttribute('aria-label', t); fsBtn.title = t;
@@ -1903,3 +1919,5 @@ openFromHash();
   });
 })();
 </script>
+</body>
+</html>
