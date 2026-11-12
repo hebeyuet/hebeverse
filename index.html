@@ -224,11 +224,11 @@ html.ready .seg button{transition:color .25s}
 .dw .d{width:100%; height:100%}
 @keyframes dfloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(8deg)}}
 .fx{position:absolute; left:0; top:0; pointer-events:none}
-.slot{position:absolute; width:150px; height:150px; transform-style:preserve-3d}
-.shadow{position:absolute; left:6px; top:6px; width:138px; height:138px; border-radius:30px; background:var(--shadow-c); filter:blur(14px); transform:scale(var(--sz,1))}
-.island{position:absolute; left:0; top:0; width:150px; height:150px; transform-style:preserve-3d; transform-origin:75px 75px 0; transform:translateZ(8px) scale(var(--sz,1)); transition:transform .25s ease; cursor:pointer; outline:none}
+.slot{position:absolute; width:195px; height:195px; transform-style:preserve-3d}
+.shadow{position:absolute; left:6px; top:6px; width:183px; height:183px; border-radius:30px; background:var(--shadow-c); filter:blur(14px); transform:scale(var(--sz,1))}
+.island{position:absolute; left:0; top:0; width:195px; height:195px; transform-style:preserve-3d; transform-origin:97.5px 97.5px 0; transform:translateZ(8px) scale(var(--sz,1)); transition:transform .25s ease; cursor:pointer; outline:none}
 .island:hover,.island:focus-visible{transform:translateZ(30px) scale(var(--sz,1))}
-.isl{position:absolute; left:0; top:0; width:150px; height:150px; transform-style:preserve-3d}
+.isl{position:absolute; left:0; top:0; width:195px; height:195px; transform-style:preserve-3d}
 .island .isl{animation:bob var(--dur,5s) ease-in-out var(--delay,0s) infinite}
 @keyframes bob{0%,100%{transform:translateZ(30px)}50%{transform:translateZ(50px)}}
 .island:hover .plat .top,.island:focus-visible .plat .top{box-shadow:0 0 0 5px var(--ring),0 0 26px 8px var(--ring-glow)}
@@ -237,8 +237,8 @@ html.ready .seg button{transition:color .25s}
 .f.top{left:0; top:0; right:0; bottom:0}
 .f.front,.f.right{left:0; top:0; transform-origin:0 0}
 .f.top{background:linear-gradient(135deg,rgba(255,255,255,.4),rgba(255,255,255,0) 55%),var(--t1); box-shadow:inset 0 0 0 2px rgba(255,255,255,.1)}
-.f.front{background:linear-gradient(0deg,rgba(255,255,255,.22),rgba(255,255,255,0) 60%),var(--t2); box-shadow:inset 0 0 0 2px rgba(255,255,255,.05)}
-.f.right{background:linear-gradient(0deg,rgba(255,255,255,.12),rgba(255,255,255,0) 60%),var(--t3); box-shadow:inset 0 0 0 2px rgba(255,255,255,.04)}
+.f.front{background:var(--t2)}
+.f.right{background:var(--t3)}
 .plat{--t1:var(--plat-top); --t2:var(--plat-front); --t3:var(--plat-right)}
 .tape{position:absolute; transform-style:preserve-3d}
 .tband{position:absolute; left:0; top:0; width:0; height:0; transform-style:preserve-3d}
@@ -272,7 +272,7 @@ html.ready .seg button{transition:color .25s}
 .lbl .t{min-width:0; overflow:hidden; text-overflow:ellipsis}
 .lbl .mk{flex:none; width:1rem; height:1rem; fill:var(--star); filter:drop-shadow(0 0 3px var(--star-glow)) drop-shadow(0 0 7px #7cf0ff); animation:twinkle 2.2s ease-in-out infinite}
 @keyframes twinkle{0%,100%{transform:scale(.8) rotate(0); opacity:.85}50%{transform:scale(1.25) rotate(45deg); opacity:1}}
-.ripple{position:absolute; left:-8px; top:-8px; width:166px; height:166px; border-radius:50%; border:5px solid #7cf0ff; box-shadow:0 0 18px 3px rgba(124,240,255,.8),inset 0 0 18px 2px rgba(124,240,255,.6); opacity:0; pointer-events:none; transform:translateZ(1px) scale(.7); animation:ripple 2.8s ease-out var(--rd,0s) infinite}
+.ripple{position:absolute; left:-8px; top:-8px; width:211px; height:211px; border-radius:50%; border:5px solid #7cf0ff; box-shadow:0 0 18px 3px rgba(124,240,255,.8),inset 0 0 18px 2px rgba(124,240,255,.6); opacity:0; pointer-events:none; transform:translateZ(1px) scale(.7); animation:ripple 2.8s ease-out var(--rd,0s) infinite}
 @keyframes ripple{0%{opacity:.95; transform:translateZ(1px) scale(.65)}100%{opacity:0; transform:translateZ(1px) scale(1.9)}}
 .peek{position:absolute; z-index:6; width:240px; padding:7px; border-radius:18px; pointer-events:none; background:var(--bezel); border:1.5px solid var(--metal-edge); box-shadow:var(--drop-lg)}
 .peek-screen{position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#110720; box-shadow:inset 0 0 0 2px rgba(0,0,0,.35)}
@@ -990,7 +990,7 @@ dialog.timmy .tname{margin:0; font:400 clamp(1.2rem,3.2vw,1.7rem)/1 var(--font-p
       </div></div>
       <div class="lbar" id="lbar" hidden>
         <button type="button" class="btn" id="lbEdit">Arrange layout</button>
-        <p class="lbhelp" id="lbHelp" hidden>Drag the round handles (cyan = project islands, pink = decorations), or Tab to one and use the arrow keys. Positions snap to half a grid step.</p>
+        <p class="lbhelp" id="lbHelp" hidden>Drag the round handles (cyan = project islands, pink = decorations), or Tab to one and use the arrow keys. Islands snap to the bold floor lines (a quarter of a step), decorations to half a step.</p>
         <button type="button" class="btn" id="lbCopy" hidden>Show layout code</button>
         <button type="button" class="btn" id="lbReset" hidden>Reset to automatic</button>
         <button type="button" class="btn" id="lbDone" hidden>Done</button>
@@ -1155,27 +1155,41 @@ const TONES = [
   ['#b88cff','#7b3fe0','#6d24b0'], ['#f2f3fa','#bfc3d6','#8b90a8'], ['#e2c8ff','#b48cf0','#8d63c9'],
   ['#9aa6ff','#5b64e0','#493da8'], ['#f0a8ff','#c05ce0','#8e38aa'], ['#c9f3ff','#84cfe8','#5aa0bd'],
   ['#7b3fe0','#6d24b0','#4c1680'], ['#d3d6e2','#a3a8bd','#7c7d9c'], ['#9399ae','#6a6b8a','#4a4a69'],   // 6 dark purple, 7 light gray, 8 dark gray
-  ['#a97bff','#7b3fe0','#6d24b0'], ['#7fe3f5','#38bfdc','#2392b3'], ['#ffe1f6','#f6b6e6','#d58cc6'], ['#c455e0','#8e2fa8','#611c78'], ['#f1e6ff','#d6bcfb','#b496e6']      // 9 mid purple (spare), 10 cyan, 11 light pink, 12 dark magenta, 13 very light purple
+  ['#a97bff','#7b3fe0','#6d24b0'], ['#7fe3f5','#38bfdc','#2392b3'], ['#ffe1f6','#f6b6e6','#d58cc6'], ['#c455e0','#8e2fa8','#611c78'], ['#f1e6ff','#d6bcfb','#b496e6'],     // 9 mid purple (spare), 10 cyan, 11 light pink, 12 dark magenta, 13 very light purple
+  ['#9aa6ff','#6a74ea','#525ac4'], ['#4a4a62','#34344a','#26263a'], ['#336b79','#2a5663','#20434e'], ['#7782f2','#434cc4','#33288a'], ['#e07af5','#c455e0','#9b3ab8'], ['#e6bcd6','#cf9bbc','#ab7798']      // 19 medium pink (Grandrooms walls), 14 light periwinkle, 15 near black, 16 dark teal (Grandrooms floor), 17 periwinkle (can), 18 magenta (can label)
 ];
-const PRESETS = {   // [x, y, z, width, depth, height] inside a 120 x 120 footprint
-  tower:   [[32,32,0,60,60,120]],
-  slab:    [[0,0,0,120,120,28],[32,32,28,60,60,44]],
-  stack:   [[8,8,0,104,104,32],[24,24,32,72,72,28],[40,40,60,40,40,32]],
-  steps:   [[0,20,0,40,84,32],[40,20,0,40,84,60],[80,20,0,40,84,92]],
-  arch:    [[8,8,0,28,104,72],[84,8,0,28,104,72],[8,8,72,104,104,20]],
-  cluster: [[0,0,0,56,56,52],[68,0,0,52,56,84],[0,68,0,56,52,32],[68,68,0,52,52,64]],
-  spire:   [[20,20,0,80,80,24],[40,40,24,44,44,32],[52,52,56,20,20,72]],
-  bridge:  [[0,12,0,32,100,60],[92,12,0,28,100,60],[32,32,44,60,60,16],[44,44,60,32,32,24]],
-  pillars: [[0,0,0,32,32,92],[44,44,0,32,32,60],[92,92,0,28,28,112],[92,0,0,28,32,36],[0,92,0,32,28,48]],
-  /* Block design rule: every position and size is a multiple of one grid cell (4 units), and no size is smaller than one cell (4). Round shapes are stacked pairs of crossed boxes.
-     multi-colour shapes: c = up to 3 colours (indexes into TONES), b = boxes [x,y,z,w,d,h,colour] with colour an index into c */
-  computer: {c:[13,0],b:[[40,32,0,40,40,12,0],[24,16,12,72,64,52,0],[36,4,20,48,12,36,0],[32,80,24,56,4,36,1],[64,80,16,16,4,4,1],[24,88,0,72,28,8,0],[28,92,8,64,4,4,1],[28,104,8,64,4,4,1],[100,68,0,12,20,8,0],[104,48,0,4,20,4,1],[80,48,0,28,4,4,1]]},
-  room: {c:[7,1,8],b:[[0,0,0,120,120,4,2],[0,0,4,120,8,76,0],[0,8,4,8,36,76,0],[0,76,4,8,44,76,0],[0,44,56,8,32,24,0],[88,16,4,24,24,56,1],[88,40,36,24,4,4,2],[92,40,44,4,4,12,2],[92,40,20,4,4,12,2],[8,80,24,32,28,4,1],[8,80,4,4,4,20,1],[36,80,4,4,4,20,1],[8,104,4,4,4,20,1],[36,104,4,4,4,20,1]]},
-  can: {c:[3,1,8],b:[[36,24,0,48,72,4,1],[24,36,0,72,48,4,1],[36,24,4,48,72,64,0],[24,36,4,72,48,64,0],[40,28,68,40,64,4,1],[28,40,68,64,40,4,1],[40,28,72,40,64,4,2],[28,40,72,64,40,4,2],[60,44,76,32,20,4,1],[48,48,80,36,12,4,2],[52,96,24,16,4,4,1],[48,96,28,24,4,4,1],[44,96,32,32,4,12,1],[48,96,44,24,4,4,1],[52,96,48,16,4,4,1]]},
-  garden: {c:[10,5,8],b:[[4,48,0,112,24,4,0],[12,28,0,96,64,4,0],[28,12,0,64,96,4,0],[48,4,0,24,112,4,0],[12,52,4,96,16,4,0],[20,32,4,80,56,4,0],[32,20,4,56,80,4,0],[52,12,4,16,96,4,0],[16,52,8,88,16,8,0],[24,36,8,72,48,8,0],[36,24,8,48,72,8,0],[52,16,8,16,88,8,0],[52,52,16,16,16,48,2],[24,52,60,80,16,8,0],[24,36,60,72,48,8,0],[36,24,60,48,72,8,0],[52,16,60,16,88,8,0],[28,32,60,8,8,8,0],[20,68,60,8,8,8,0],[28,52,68,72,16,8,0],[36,44,68,48,32,8,0],[40,32,68,40,56,8,0],[52,24,68,16,72,8,0],[32,32,68,8,8,8,0],[88,64,68,8,8,8,0],[36,56,76,48,8,8,1],[44,44,76,40,32,8,1],[48,40,76,24,40,8,1],[56,36,76,8,40,8,1],[44,36,76,12,12,8,1],[40,64,76,8,12,8,1]]},   // every position and size is a multiple of 4; the mound is round, the mushroom cap deliberately uneven
-  dancers: {c:[4,1,12,7,8],b:[[0,0,0,120,120,4,4],[0,0,76,120,8,12,3],[0,0,4,24,8,72,3],[96,0,4,24,8,72,3],[0,8,76,8,112,12,3],[0,8,4,8,24,72,3],[0,96,4,8,24,72,3],[16,8,80,88,4,4,1],[8,8,76,8,8,12,1],[104,8,76,8,8,12,1],[16,8,72,88,8,8,0],[16,8,60,40,8,12,0],[64,8,60,40,8,12,0],[16,8,48,32,8,12,0],[72,8,48,32,8,12,0],[16,8,36,16,8,12,0],[88,8,36,16,8,12,0],[12,8,40,24,12,4,1],[84,8,40,24,12,4,1],[16,8,20,24,8,16,0],[80,8,20,24,8,16,0],[16,8,4,24,8,16,0],[80,8,4,24,8,16,0],[8,24,80,4,80,4,1],[8,16,76,8,8,12,1],[8,104,76,8,8,12,1],[8,24,72,8,80,8,0],[8,24,60,8,36,12,0],[8,68,60,8,36,12,0],[8,24,48,8,28,12,0],[8,76,48,8,28,12,0],[8,24,36,8,12,12,0],[8,92,36,8,12,12,0],[8,20,40,12,20,4,1],[8,88,40,12,20,4,1],[8,24,20,8,20,16,0],[8,84,20,8,20,16,0],[8,24,4,8,20,16,0],[8,84,4,8,20,16,0],[76,64,4,8,8,28,2],[76,64,32,8,8,8,1],[60,76,4,12,12,12,0],[64,80,16,8,8,12,0],[64,80,28,8,8,8,1]]},
-  planet: {c:[6,2,7],b:[[48,40,8,24,40,12,0],[40,48,8,40,24,12,0],[44,28,20,32,64,12,0],[28,44,20,64,32,12,0],[40,24,32,40,72,12,0],[24,40,32,72,40,12,0],[44,28,44,32,64,12,0],[28,44,44,64,32,12,0],[48,40,56,24,40,12,0],[40,48,56,40,24,12,0],[96,52,56,16,16,8,2],[92,68,56,16,16,8,2],[84,84,52,16,16,8,2],[68,92,44,16,16,8,2],[52,96,36,16,16,8,2],[36,92,28,16,16,8,2],[20,84,20,16,16,8,2],[12,68,16,16,16,8,2],[8,52,16,16,16,8,2],[12,36,16,16,16,8,2],[20,20,20,16,16,8,2],[36,12,28,16,16,8,2],[52,8,36,16,16,8,2],[68,12,44,16,16,8,2],[84,20,52,16,16,8,2],[92,36,56,16,16,8,2],[12,4,68,8,24,8,2],[4,12,68,24,8,8,2],[96,4,88,8,32,8,2],[84,16,88,32,8,8,2],[12,92,52,8,24,8,2],[4,100,52,24,8,8,2]]},
-  star: {c:[11,4,1,12,8],b:[[24,64,0,20,24,8,3],[48,64,0,20,24,8,3],[32,40,8,24,48,16,0],[20,52,8,48,24,16,0],[24,28,24,40,72,16,0],[8,44,24,72,40,16,0],[24,28,40,40,72,16,0],[8,44,40,72,40,16,0],[32,40,56,24,48,16,0],[20,52,56,48,24,16,0],[0,60,36,12,12,12,0],[80,60,36,12,12,12,0],[96,24,0,24,24,8,2],[104,32,8,8,8,92,2],[76,32,100,36,8,8,2],[68,28,88,20,16,12,2],[36,100,36,4,4,12,4],[52,100,36,4,4,12,4]]},   // the last two are the creature's eyes
+/* ISLAND GRID. Everything an island is made of sits on one grid, the same grid as the floor lines you see:
+   one CELL = 13 units = one faint floor line; one bold floor line = 5 cells; a platform is 15 x 15 cells (3 bold floor cells) and islands are 4 bold floor cells apart (a gap of 1).
+   Blocks are written in whole cells: [column, row, level, width, depth, height, colour]. Columns and rows run 0-12 (a 13 x 13 area in the middle of the
+   platform, one cell of platform left around it); level 0 is the platform top and a level is also 1 cell high (cubes), up to 12 levels (the tallest block top is 156 units).
+   Nothing is ever smaller than one cell and nothing sits between grid lines. Round shapes are stacked pairs or trios of crossed boxes.
+   multi-colour shapes: c = up to 5 colours (indexes into TONES), b = blocks with colour an index into c.
+   Blocks of one colour that touch and form one box are fused automatically (mergeBlocks), so write them in whatever way is easiest to read. */
+const CELL = 13, PLAT_CELLS = 15, PLAT = CELL * PLAT_CELLS, PLAT_H = CELL, ISL_PAD = 1, PITCH = 4 * 5 * CELL;   // PITCH = distance between island centres for 1 col or row: 4 bold floor cells (260 units)
+const PRESETS = {
+  tower:   [[4,4,0,5,5,11]],
+  slab:    [[0,0,0,13,13,3],[3,3,3,7,7,5]],
+  stack:   [[0,0,0,13,13,3],[2,2,3,9,9,3],[5,5,6,3,3,5]],
+  steps:   [[0,2,0,4,9,3],[4,2,0,4,9,6],[8,2,0,5,9,9]],
+  arch:    [[0,0,0,3,13,8],[10,0,0,3,13,8],[0,0,8,13,13,2]],
+  cluster: [[0,0,0,6,6,4],[7,0,0,6,6,7],[0,7,0,6,6,3],[7,7,0,6,6,5]],
+  spire:   [[1,1,0,11,11,3],[3,3,3,7,7,3],[5,5,6,3,3,6]],
+  bridge:  [[0,2,0,3,9,6],[10,2,0,3,9,6],[3,4,5,7,5,2],[5,5,7,3,3,3]],
+  pillars: [[0,0,0,3,3,9],[5,5,0,3,3,6],[10,10,0,3,3,11],[10,0,0,3,3,3],[0,10,0,3,3,5]],
+  /* THE BRAINROOMS: a CRT computer with a screen icon, power button, keyboard and mouse */
+  computer: {c:[13,0],b:[[2,2,2,8,6,6,0],[2,9,0,8,3,1,0],[3,0,3,6,2,4,0],[4,3,0,4,4,1,0],[11,6,0,2,3,1,0],[5,4,1,2,2,1,0],[3,8,4,6,1,3,1],[3,9,1,6,1,1,1],[3,11,1,6,1,1,1],[8,4,0,4,1,1,1],[11,5,0,1,1,1,1]]},
+  /* The Grandrooms: a room with a doorway, a fridge, a table and an armchair. c = walls, silver, dark */
+  room: {c:[7,1,8,16],b:[[0,0,1,13,1,10,0],[0,1,1,1,12,10,0],[0,0,0,13,13,1,3],[8,2,1,4,3,9,1],[1,7,4,4,6,1,1],[9,5,1,3,1,4,1],[9,5,6,3,1,4,1],[1,7,1,1,1,3,1],[1,12,1,1,1,3,1],[4,7,1,1,1,3,1],[4,12,1,1,1,3,1],[8,5,1,1,1,1,1],[8,5,4,1,1,1,1],[8,5,6,1,1,1,1],[8,5,9,1,1,1,1],[8,5,5,4,1,1,2],[8,5,2,1,1,2,2],[8,5,7,1,1,2,2]]},
+  /* Everything's Connected: a can with rims, a lid, a pull tab and a square label */
+  can: {c:[17,7,8,15,18,1,14],b:[[3,5,1,7,3,7,0],[4,4,1,5,5,7,0],[5,3,6,3,7,2,0],[5,3,1,3,7,2,0],[7,3,3,1,1,3,0],[5,4,0,3,5,1,2],[4,5,0,5,3,1,2],[7,5,8,1,3,1,2],[5,5,8,2,1,1,2],[5,7,8,2,1,1,2],[4,5,8,1,3,1,1],[8,5,8,1,3,1,1],[5,4,8,3,1,1,1],[5,8,8,3,1,1,1],[5,6,8,1,1,1,1],[5,9,5,3,1,1,4],[5,9,4,1,1,1,4],[6,9,4,2,1,1,5],[5,9,3,1,1,1,5],[6,9,3,2,1,1,6],[6,6,8,1,1,1,3]]},
+  /* New Eden: a tree on a stepped mound */
+  garden: {c:[10,5,8],b:[[3,3,1,7,7,1,0],[3,1,0,7,11,1,0],[1,3,0,11,7,1,0],[4,3,9,6,6,2,0],[4,2,1,5,9,1,0],[4,2,9,5,9,1,0],[2,4,1,9,5,1,0],[2,4,9,9,5,1,0],[4,9,10,5,1,1,0],[3,4,10,1,5,1,0],[2,2,0,9,9,1,0],[3,3,9,7,7,1,0],[1,5,9,1,2,1,0],[2,9,10,1,1,1,0],[3,5,11,1,1,1,0],[9,7,11,1,1,1,0],[11,7,9,1,1,1,0],[6,6,2,2,2,7,2],[5,6,2,3,3,1,2],[4,6,2,1,2,1,2],[8,6,2,1,1,1,2],[5,4,11,3,5,1,1],[4,5,11,5,3,1,1],[7,3,11,1,1,1,1]]},
+  /* Velvet: a stage room with pink curtains and valances, a podium and two silver dancers. c = pink, silver, dark magenta, light grey, dark grey */
+  dancers: {c:[4,1,12,7,8],b:[[0,0,0,13,13,1,4],[1,2,6,1,3,4,0],[1,8,6,1,3,4,0],[2,1,6,3,1,4,0],[8,1,6,3,1,4,0],[1,2,1,1,2,3,0],[1,9,1,1,2,3,0],[2,1,1,2,1,3,0],[9,1,1,2,1,3,0],[6,8,1,1,1,3,0],[1,5,9,1,3,1,0],[5,1,9,3,1,1,0],[1,2,5,1,2,1,0],[1,9,5,1,2,1,0],[2,1,5,2,1,1,0],[9,1,5,2,1,1,0],[1,5,8,1,1,1,0],[1,7,8,1,1,1,0],[5,1,8,1,1,1,0],[7,1,8,1,1,1,0],[0,11,1,1,2,10,3],[11,0,1,2,1,10,3],[0,0,10,1,11,1,3],[1,0,1,1,1,10,3],[0,1,1,1,1,9,3],[2,0,10,9,1,1,3],[1,1,10,1,11,1,1],[2,1,10,10,1,1,1],[1,2,4,1,2,1,1],[1,9,4,1,2,1,1],[2,1,4,2,1,1,1],[9,1,4,2,1,1,1],[6,8,4,1,1,1,1],[8,7,4,1,1,1,1],[8,7,1,1,1,3,2]]},
+  /* Orbiting the Imaginary: a planet with a tilted ring and two small moons */
+  planet: {c:[6,1,7],b:[[4,4,2,5,5,5,0],[5,5,1,3,3,7,0],[5,3,3,3,7,3,0],[3,5,3,7,3,3,0],[1,4,2,1,5,1,2],[11,4,6,1,5,1,2],[5,1,4,3,1,1,2],[5,11,4,3,1,1,2],[2,3,2,1,2,1,2],[2,8,2,1,2,1,2],[4,1,3,1,2,1,2],[4,10,3,1,2,1,2],[8,1,5,1,2,1,2],[8,10,5,1,2,1,2],[10,3,6,1,2,1,2],[10,8,6,1,2,1,2],[2,2,8,1,1,1,2],[2,11,6,1,1,1,2],[3,2,3,1,1,1,2],[3,10,3,1,1,1,2],[9,2,5,1,1,1,2],[9,10,6,1,1,1,2],[11,2,9,1,1,1,2]]},
+  /* Beyond the Stars: a round pink creature (feet, arms, eyes, cheeks) beside a street lamp. c = pink, magenta, silver, dark magenta, dark grey */
+  star: {c:[11,4,1,12,8],b:[[1,4,2,7,5,4,0],[2,3,2,5,7,4,0],[3,4,1,3,5,6,0],[2,5,1,5,3,6,0],[0,6,3,9,2,1,0],[11,3,1,1,1,10,2],[10,2,0,3,3,1,2],[8,3,10,3,1,1,2],[8,3,9,2,2,1,2],[2,7,0,2,3,1,3],[5,7,0,2,3,1,3],[3,10,3,1,1,2,4],[5,10,3,1,1,2,4]]},
 };
 const SHAPE_ORDER = ['tower','slab','stack','steps','arch','cluster'];
 
@@ -1294,13 +1308,13 @@ function buildIsland(i){
   const p = PROJECTS[i];
   const def = PRESETS[p.shape] || PRESETS[SHAPE_ORDER[i % SHAPE_ORDER.length]], shape = mergeBlocks(Array.isArray(def) ? def : def.b), cols = def.c;
   const isl = el('div','isl'); setTone(isl, toneOf(i));
-  isl.append(box(0,0,0,150,150,16,'plat'));
+  isl.append(box(0,0,0,PLAT,PLAT,PLAT_H,'plat'));
   let top = 0;
-  shape.forEach(s => { const bx = sbox(s[0]+15, s[1]+15, s[2]+16, s[3], s[4], s[5], 'blk'); if(cols && s[6] != null) setTone(bx, cols[s[6]]); isl.append(bx); top = Math.max(top, s[2]+s[5]); });
+  shape.forEach(s => { const bx = sbox((s[0] + ISL_PAD) * CELL, (s[1] + ISL_PAD) * CELL, PLAT_H + s[2] * CELL, s[3] * CELL, s[4] * CELL, s[5] * CELL, 'blk'); if(cols && s[6] != null) setTone(bx, cols[s[6]]); isl.append(bx); top = Math.max(top, (s[2] + s[5]) * CELL); });
   if(isWip(p)){
-    const L = 136, ring = el('div','tape'); ring.style.cssText = 'left:7px;top:7px;width:'+L+'px;height:'+L+'px';
+    const L = PLAT - 14, ring = el('div','tape'); ring.style.cssText = 'left:7px;top:7px;width:'+L+'px;height:'+L+'px';
     [[22,0]].forEach(([z, alt]) => {
-      const band = el('div','tband'+(alt ? ' alt' : '')); band.style.transform = 'translateZ(' + (16 + z) + 'px)';
+      const band = el('div','tband'+(alt ? ' alt' : '')); band.style.transform = 'translateZ(' + (PLAT_H + z) + 'px)';
       [['translateY(0) rotateX(90deg)',-1],['translateY('+L+'px) rotateX(90deg)',1],['rotateZ(90deg) rotateX(90deg)',1],['translateX('+L+'px) rotateZ(90deg) rotateX(90deg)',-1]].forEach(([tf, dir]) => {
         const f = el('i','tf'); f.style.width = L + 'px'; f.style.transform = tf; f.style.setProperty('--ang', (dir * 45) + 'deg'); band.append(f);
       });
@@ -1308,7 +1322,7 @@ function buildIsland(i){
     });
     isl.append(ring);
   }
-  isl.dataset.top = String(top + 16);
+  isl.dataset.top = String(top + PLAT_H);
   return isl;
 }
 const isWip = p => p.status === 'wip';
@@ -1373,7 +1387,7 @@ function fxSpawn(isl){
   const s = isl._s || 1; let dx, dy;
   do { dx = Math.random() * 2 - 1; dy = Math.random() * 2 - 1; } while(Math.abs(dx) + Math.abs(dy) > 1);   // anywhere on the diamond-shaped island
   const hgt = Math.random() * ((isl._top || 100) * .85 + 20) * s;                                        // and at any height up the block
-  parts.push({ x:isl._bx + dx * 100 * s, y:isl._by + dy * 54 * s - hgt, vy:(.22 + Math.random() * .35) * s, vx:(Math.random() - .5) * .18,
+  parts.push({ x:isl._bx + dx * 130 * s, y:isl._by + dy * 70 * s - hgt, vy:(.22 + Math.random() * .35) * s, vx:(Math.random() - .5) * .18,
     life:0, max:120 + Math.random() * 110, size:(1.2 + Math.random() * 2.2) * Math.max(s, .8) * (window.innerWidth <= 700 ? .6 : 1), col:FX_COL[(Math.random() * FX_COL.length) | 0], rise:0, k:window.innerWidth <= 700 ? .6 : 1 });
 }
 function fxLoop(){
@@ -1584,7 +1598,7 @@ let worldBuilt = false;   // the world is only built where it is allowed (see mq
 function layoutWorld(){
   if(!worldBuilt) return;
   const n = PROJECTS.length, avail = worldWrap.clientWidth; if(!n || !avail) return;
-  const TILT = 58, ct = Math.cos(TILT * Math.PI / 180), sn = Math.sin(TILT * Math.PI / 180), k = 0.7071, P = 205;
+  const TILT = 58, ct = Math.cos(TILT * Math.PI / 180), sn = Math.sin(TILT * Math.PI / 180), k = 0.7071, P = PITCH;
   /* island positions: the ones written in the project list, otherwise a scattered automatic layout */
   const manualIsl = PROJECTS.every(p => Array.isArray(p.cell));
   const rel = manualIsl ? PROJECTS.map(p => p.cell.slice()) : pickScatter(n);
@@ -1594,6 +1608,7 @@ function layoutWorld(){
     rel.splice(0, rel.length, ...out);
   }
   { const a = PROJECTS.findIndex(p => p.title === 'Velvet'), b = PROJECTS.findIndex(p => p.title === 'THE BRAINROOMS'); if(!manualIsl && a >= 0 && b >= 0) [rel[a], rel[b]] = [rel[b], rel[a]]; }   // swap these two blocks' places in the world
+  rel.forEach(q => { q[0] = Math.round(q[0] * 4) / 4; q[1] = Math.round(q[1] * 4) / 4; });   // islands sit on whole bold floor cells (a quarter of an island step)
   const extent = Math.max(...rel.flat().map(Math.abs));
   const H = Math.max(editing ? 2.5 : 1.5, Math.ceil(extent * 2) / 2 + .5);
   const W = 2 * H * P, D = W;
@@ -1602,7 +1617,7 @@ function layoutWorld(){
   const fs = workDev.classList.contains('fs') || workDev.classList.contains('fit');
   if(fs) worldWrap.style.height = '';
   let s = Math.min(1.3 * ZOOM, (avail - 32) / projW * ZOOM);
-  const LBL_Z = 190;   // every label floats at the same height above its base
+  const LBL_Z = 235;   // every label floats at the same height above its base
   let maxZ = LBL_Z;
   const above = Math.ceil(maxZ * sn) + 40, below = 70;
   const yy = rel.map(([c, r]) => (Math.max(-2, Math.min(2, c)) + Math.max(-2, Math.min(2, r))) * P * k * ct);   // the frame's height is worked out from the middle 4 x 4 cells only
@@ -1614,6 +1629,7 @@ function layoutWorld(){
   if(!fs || editing) worldWrap.style.height = wrapH + 'px';
   stage.style.left = (avail / 2 - W / 2) + 'px';
   stage.style.top = (cyW - D / 2) + 'px';
+  { const o = (((1000 + W / 2 - 32.5) % 65) + 65) % 65 - 1; floor.style.backgroundPosition = o + 'px ' + o + 'px'; }   // the floor lines are shifted so a bold line runs half a bold cell from the middle of the world: every island edge (centre +- 1.5 bold cells) lands on one
   stage.style.transform = 'scale(' + s + ') rotateX(' + TILT + 'deg) rotateZ(45deg)';
   setLabelsShown(s * pan.z >= 0.22, true);   // on very small screens the labels would crowd each other
   sizeFx();
@@ -1622,7 +1638,7 @@ function layoutWorld(){
   frame = { s, cx, cy, k, ct, sn, P, H };
   islands.forEach((isl, i) => {
     const [c, r] = rel[i], z = LBL_Z;
-    isl._slot.style.left = (W / 2 + c * P - 75) + 'px'; isl._slot.style.top = (D / 2 + r * P - 75) + 'px';
+    isl._slot.style.left = (W / 2 + c * P - PLAT / 2) + 'px'; isl._slot.style.top = (D / 2 + r * P - PLAT / 2) + 'px';
     [isl._ax, isl._ay] = project(c, r, z);
     isl._lbl.style.left = isl._ax + 'px'; isl._lbl.style.top = isl._ay + 'px';
     [isl._bx, isl._by] = project(c, r, 40); isl._s = s;
@@ -1656,7 +1672,7 @@ function layoutWorld(){
     islands.forEach(isl => {
       const lw = (labels.hidden ? 0 : (isl._lbl.offsetWidth || 160)), lh = labels.hidden ? 0 : (isl._lbl.offsetHeight || 30);
       if(lw) boxes.push([isl._ax - lw / 2 - 8, isl._ay - lh - 8, isl._ax + lw / 2 + 8, isl._ay + 8]);
-      boxes.push([isl._bx - 112 * s, isl._by - ((isl._top || 100) * isl._sz * .85 + 70) * s, isl._bx + 112 * s, isl._by + 62 * s]);
+      boxes.push([isl._bx - 146 * s, isl._by - ((isl._top || 100) * isl._sz * .85 + 70) * s, isl._bx + 146 * s, isl._by + 81 * s]);
     });
     const chosen = [];
     for(let i = 0; i < DSZ.length; i++){
@@ -1687,7 +1703,7 @@ const unproject = (sx, sy, z) => {
   const f = frame, u = (sx - f.cx) / (f.s * f.k), v = ((sy - f.cy) / f.s + z * f.sn) / (f.k * f.ct);
   return [(u + v) / 2 / f.P, (v - u) / 2 / f.P];
 };
-const snap = v => Math.max(-2.5, Math.min(2.5, Math.round(v * 2) / 2));
+const snap = (v, d = 2) => Math.max(-2.5, Math.min(2.5, Math.round(v * d) / d));
 function handleList(){
   return PROJECTS.map((p, i) => ({ kind:'isl', i, name:p.title, z:40, get at(){ return PROJECTS[i].cell; }, set at(v){ PROJECTS[i].cell = v; }, sx:islands[i]._bx, sy:islands[i]._by }))
     .concat(SITE.decos.map((d, i) => ({ kind:'deco', i, name:'Decoration ' + (i + 1) + ' (' + d.shape + ')', z:d.z || 60, get at(){ return SITE.decos[i].at; }, set at(v){ SITE.decos[i].at = v; }, sx:lastLayout.decos[i] ? lastLayout.decos[i].sx : 0, sy:lastLayout.decos[i] ? lastLayout.decos[i].sy : 0 })));
@@ -1699,17 +1715,17 @@ function placeHandles(){
     for(let c = -3; c <= 3; c++) for(let r = -3; r <= 3; r++){ const d = el('i','gp'); d.dataset.c = c; d.dataset.r = r; handleLayer.append(d); }
     list.forEach(h => {
       const b = el('button','hnd ' + h.kind); b.type = 'button'; handleEls.push(b); handleLayer.append(b);
-      const move = (nc, nr) => { h.at = [snap(nc), snap(nr)]; layoutWorld(); lbOut.hidden = true; saveLayout(); b.focus(); };
+      const dv = h.kind === 'isl' ? 4 : 2, move = (nc, nr) => { h.at = [snap(nc, dv), snap(nr, dv)]; layoutWorld(); lbOut.hidden = true; saveLayout(); b.focus(); };
       b.addEventListener('pointerdown', e => { b.setPointerCapture(e.pointerId); b.classList.add('drag'); e.preventDefault(); });
       b.addEventListener('pointermove', e => {
         if(!b.classList.contains('drag')) return; const r = worldWrap.getBoundingClientRect();
-        const [c, rr] = unproject(e.clientX - r.left, e.clientY - r.top, h.z); const cur = h.at, nc = snap(c), nr = snap(rr);
+        const [c, rr] = unproject(e.clientX - r.left, e.clientY - r.top, h.z); const cur = h.at, nc = snap(c, dv), nr = snap(rr, dv);
         if(nc !== cur[0] || nr !== cur[1]){ h.at = [nc, nr]; layoutWorld(); lbOut.hidden = true; }
       });
       const up = () => { if(b.classList.contains('drag')){ b.classList.remove('drag'); saveLayout(); } };
       b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up);
       b.addEventListener('keydown', e => {
-        const st = e.shiftKey ? 1 : .5, d = { ArrowRight:[st,0], ArrowLeft:[-st,0], ArrowDown:[0,st], ArrowUp:[0,-st] }[e.key]; if(!d) return;
+        const st = e.shiftKey ? 1 : 1 / dv, d = { ArrowRight:[st,0], ArrowLeft:[-st,0], ArrowDown:[0,st], ArrowUp:[0,-st] }[e.key]; if(!d) return;
         e.preventDefault(); const cur = h.at; move(cur[0] + d[0], cur[1] + d[1]);
       });
     });
@@ -2184,6 +2200,8 @@ html:root .about-intro .lead .k7{background-image:none; -webkit-text-fill-color:
   .work-dev .head{flex-wrap:nowrap}
   .work-dev .head .key{order:0; flex:0 1 auto; margin:0 auto 0 1.6rem; font-size:.95rem; gap:.4rem 1.5rem}
   .work-dev .world-in{position:relative}
+  .work-dev{padding-top:14px}
+  .work-dev .head{margin-bottom:12px}   /* room between the World/List switch and the screen */
   .work-dev .lcd{position:absolute; left:50%; bottom:.9rem; transform:translateX(-50%); margin:0; padding:0; z-index:6; max-width:90%; flex-wrap:nowrap; justify-content:center; background:none; box-shadow:none; border-radius:0; pointer-events:none; text-align:center; font:400 .95rem/1.2 var(--font-pixel); letter-spacing:.06em; color:#fff; text-shadow:0 1px 3px rgba(50,30,90,.8),0 0 8px rgba(50,30,90,.55); gap:0 1.1rem}
   .work-dev .lcd .t,.work-dev .lcd .m{font:inherit; letter-spacing:inherit; color:inherit; white-space:nowrap}
   .work-dev .lcd .m{opacity:.8}
@@ -2191,10 +2209,10 @@ html:root .about-intro .lead .k7{background-image:none; -webkit-text-fill-color:
 </style>
 <style>
 /* one-element blocks */
-.sbx{background:linear-gradient(135deg,rgba(255,255,255,.4),rgba(255,255,255,0) 55%),var(--t1); box-shadow:inset 0 0 0 2px rgba(255,255,255,.1)}
+.sbx{background:var(--t1)}
 .sbx::before,.sbx::after{content:""; position:absolute; left:0; top:0; transform-origin:0 0}
-.sbx::before{width:var(--w); height:var(--h); transform:translateZ(calc(var(--h) * -1)) translateY(var(--d)) rotateX(90deg); background:linear-gradient(0deg,rgba(255,255,255,.22),rgba(255,255,255,0) 60%),var(--t2); box-shadow:inset 0 0 0 2px rgba(255,255,255,.05)}
-.sbx::after{width:var(--d); height:var(--h); transform:translateZ(calc(var(--h) * -1)) translateX(var(--w)) rotateZ(90deg) rotateX(90deg); background:linear-gradient(0deg,rgba(255,255,255,.12),rgba(255,255,255,0) 60%),var(--t3); box-shadow:inset 0 0 0 2px rgba(255,255,255,.04)}
+.sbx::before{width:var(--w); height:var(--h); transform:translateZ(calc(var(--h) * -1)) translateY(var(--d)) rotateX(90deg); background:var(--t2)}
+.sbx::after{width:var(--d); height:var(--h); transform:translateZ(calc(var(--h) * -1)) translateX(var(--w)) rotateZ(90deg) rotateX(90deg); background:var(--t3)}
 </style>
 </body>
 </html>
