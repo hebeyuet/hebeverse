@@ -262,7 +262,7 @@ html.ready .seg button{transition:color .25s}
 .hnd:focus-visible{outline:3px solid #fff; outline-offset:2px}
 .world-wrap.editing .island{pointer-events:none}
 .labels{position:absolute; z-index:3; left:0; top:0; right:0; bottom:0; pointer-events:none}
-.lbl{pointer-events:auto; cursor:pointer; position:absolute; transform:translate(-50%,-100%); max-width:calc(var(--lw,19rem) * var(--lz,1)); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font:500 1.1rem/1.2 var(--font-pixel); letter-spacing:.02em; padding:.25rem .8rem .3rem; border:2px solid var(--line); border-radius:999px; background:var(--chip-bg); color:var(--fg)}
+.lbl{pointer-events:auto; cursor:pointer; position:absolute; transform:translate(-50%,-100%); max-width:calc(var(--lw,19rem) * max(var(--lz,1), 1)); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font:500 1.1rem/1.2 var(--font-pixel); letter-spacing:.02em; padding:.25rem .8rem .3rem; border:2px solid var(--line); border-radius:999px; background:var(--chip-bg); color:var(--fg)}
 .card.feat{border:6px solid transparent; background:var(--plate-bg) padding-box,linear-gradient(100deg,#00e5ff,#8f5cff,#ff3fd0,#ffe14d,#00e5ff) border-box; background-size:auto,300% 100%;
   box-shadow:var(--drop),0 0 0 2px rgba(255,255,255,.55),0 0 26px 5px rgba(143,92,255,.55),0 0 14px 2px rgba(0,229,255,.55); animation:hborder 4s linear infinite}
 @keyframes hborder{to{background-position:0 0,300% 0}}
@@ -1189,7 +1189,7 @@ const PRESETS = {
   /* Orbiting the Imaginary: a planet with a tilted ring and two small moons */
   planet: {c:[6,1,7],b:[[4,4,2,5,5,5,0],[5,5,1,3,3,7,0],[5,3,3,3,7,3,0],[3,5,3,7,3,3,0],[1,4,2,1,5,1,2],[11,4,6,1,5,1,2],[5,1,4,3,1,1,2],[5,11,4,3,1,1,2],[2,3,2,1,2,1,2],[2,8,2,1,2,1,2],[4,1,3,1,2,1,2],[4,10,3,1,2,1,2],[8,1,5,1,2,1,2],[8,10,5,1,2,1,2],[10,3,6,1,2,1,2],[10,8,6,1,2,1,2],[2,2,8,1,1,1,2],[2,11,6,1,1,1,2],[3,2,3,1,1,1,2],[3,10,3,1,1,1,2],[9,2,5,1,1,1,2],[9,10,6,1,1,1,2],[11,2,9,1,1,1,2]]},
   /* Beyond the Stars: a round pink creature (feet, arms, eyes, cheeks) beside a street lamp. c = pink, magenta, silver, dark magenta, dark grey */
-  star: {c:[11,4,1,12,8],b:[[1,4,2,7,5,4,0],[2,3,2,5,7,4,0],[3,4,1,3,5,6,0],[2,5,1,5,3,6,0],[0,6,3,9,2,1,0],[11,3,1,1,1,11,2],[10,2,0,3,3,1,2],[8,3,11,3,1,1,2],[8,3,10,2,2,1,2],[2,7,0,2,3,1,3],[5,7,0,2,3,1,3],[3,10,3,1,1,2,4],[5,10,3,1,1,2,4]]},
+  star: {c:[11,4,1,12,8],b:[[1,4,2,7,5,4,0],[3,4,1,3,5,6,0],[2,3,5,5,7,1,0],[2,5,1,5,3,6,0],[6,3,2,1,7,3,0],[2,9,2,4,1,1,0],[0,6,3,9,2,1,0],[2,9,3,1,1,2,0],[4,9,3,1,1,2,0],[11,3,1,1,1,11,4],[10,2,0,3,3,1,4],[8,3,11,3,1,1,4],[8,3,10,2,2,1,4],[3,9,3,1,1,2,4],[5,9,3,1,1,2,4],[2,7,0,2,3,1,3],[5,7,0,2,3,1,3]]},
 };
 const SHAPE_ORDER = ['tower','slab','stack','steps','arch','cluster'];
 
@@ -1522,8 +1522,8 @@ function applyPan(){
   if(frame && !editing){ setLabelsShown(frame.s * z >= .22); if(!labels.hidden) islands.forEach(isl => { if(isl._ax == null) return; isl._lbl.style.left = (cx + z * (isl._ax - cx)) + 'px'; isl._lbl.style.top = (cy + z * (isl._ay - cy)) + 'px'; }); }   // labels keep their size; only their places spread out
   if(zIn){ zIn.disabled = z >= ZMAX - .001; zOut.disabled = z <= ZMIN + .001; }
 }
-let panRaf = 0, panNx = 0, panNy = 0, panNz = 1, lastDragEnd = 0;
-function panTo(x, y, z){ panNx = x; panNy = y; panNz = z === undefined ? pan.z : z; if(!panRaf) panRaf = requestAnimationFrame(() => { panRaf = 0; pan.x = panNx; pan.y = panNy; pan.z = panNz; clampPan(); applyPan(); }); }   // one transform change per frame, nothing is re-laid out
+let viewTouched = false, panRaf = 0, panNx = 0, panNy = 0, panNz = 1, lastDragEnd = 0;
+function panTo(x, y, z){ viewTouched = true; panNx = x; panNy = y; panNz = z === undefined ? pan.z : z; if(!panRaf) panRaf = requestAnimationFrame(() => { panRaf = 0; pan.x = panNx; pan.y = panNy; pan.z = panNz; clampPan(); applyPan(); }); }   // one transform change per frame, nothing is re-laid out
 function panAnim(on){ panBack.classList.toggle('pan-anim', on); labels.classList.toggle('pan-anim', on); }
 let dragSt = null;
 worldWrap.addEventListener('pointerdown', e => {
@@ -1559,7 +1559,7 @@ worldWrap.addEventListener('touchmove', e => {
 const touchEnd = e => { if(e.touches.length < 2) touchSt = null; };
 worldWrap.addEventListener('touchend', touchEnd); worldWrap.addEventListener('touchcancel', touchEnd);
 /* zoom: the + and - buttons, ctrl + wheel (also a trackpad pinch) and, on touch screens, pinching */
-function zoomAbout(z1, mx, my, smooth){ z1 = zClamp(z1); const z0 = pan.z, qx = (mx - pan.W / 2 - pan.x) / z0, qy = (my - pan.H / 2 - pan.y) / z0; panAnim(!!smooth); peekHide(); panTo(mx - pan.W / 2 - z1 * qx, my - pan.H / 2 - z1 * qy, z1); }
+function zoomAbout(z1, mx, my, smooth){ viewTouched = true; z1 = zClamp(z1); const z0 = pan.z, qx = (mx - pan.W / 2 - pan.x) / z0, qy = (my - pan.H / 2 - pan.y) / z0; panAnim(!!smooth); peekHide(); panTo(mx - pan.W / 2 - z1 * qx, my - pan.H / 2 - z1 * qy, z1); }
 const zIn = el('button','cbtn zbtn'), zOut = el('button','cbtn zbtn');
 zIn.type = zOut.type = 'button'; zIn.setAttribute('aria-label','Zoom in'); zOut.setAttribute('aria-label','Zoom out'); zIn.title = 'Zoom in'; zOut.title = 'Zoom out';
 zIn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg>';
@@ -1646,10 +1646,15 @@ function layoutWorld(){
   /* the world may be bigger than its frame: work out how far it can be dragged */
   let bx0 = 1e9, bx1 = -1e9, by0 = 1e9, by1 = -1e9;
   islands.forEach(isl => {
-    const lw = labels.hidden ? 0 : (isl._lbl.offsetWidth || 160), lh = labels.hidden ? 0 : (isl._lbl.offsetHeight || 30), hw = Math.max(lw / 2, 112 * s) + 16;
-    bx0 = Math.min(bx0, isl._ax - hw); bx1 = Math.max(bx1, isl._ax + hw); by0 = Math.min(by0, isl._ay - lh - 16); by1 = Math.max(by1, isl._by + 70 * s);
+    const lw = labels.hidden ? 0 : (isl._lbl.offsetWidth || 160), lh = labels.hidden ? 0 : (isl._lbl.offsetHeight || 30), hw = Math.max(lw / 2, 140 * s) + 16;
+    bx0 = Math.min(bx0, isl._ax - hw); bx1 = Math.max(bx1, isl._ax + hw); by0 = Math.min(by0, isl._ay - lh - 16); by1 = Math.max(by1, isl._by + 118 * s);
   });
   Object.assign(pan, { bx0, bx1, by0, by1, W:avail, H:wrapH });
+  if(!editing && !viewTouched){   // default view: zoom out just enough for every island and label to sit in the frame, centred so the left and right islands are equally far from their edges
+    let L = 1e9, R = -1e9; islands.forEach(q => { L = Math.min(L, q._bx - 140 * s); R = Math.max(R, q._bx + 140 * s); });
+    const m = 12; pan.z = Math.max(ZMIN, Math.min(1, (avail - 2 * m) / (bx1 - bx0), (wrapH - 2 * m) / (by1 - by0)));
+    pan.x = -pan.z * ((L + R) / 2 - avail / 2); pan.y = -pan.z * ((by0 + by1) / 2 - wrapH / 2);
+  }
   worldWrap.classList.toggle('canpan', !editing); if(editing){ pan.x = 0; pan.y = 0; }
   clampPan(); applyPan();
   const ext = islands.some(isl => isl._ax < 0 || isl._ax > avail || isl._ay < 0 || isl._ay > wrapH);   // only when islands reach past the frame do the little stars spread out too
