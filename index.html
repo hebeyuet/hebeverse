@@ -1161,7 +1161,7 @@ const TONES = [
   ['#9aa6ff','#5b64e0','#493da8'], ['#f0a8ff','#c05ce0','#8e38aa'], ['#c9f3ff','#84cfe8','#5aa0bd'],
   ['#7b3fe0','#6d24b0','#4c1680'], ['#d3d6e2','#a3a8bd','#7c7d9c'], ['#9399ae','#6a6b8a','#4a4a69'],   // 6 dark purple, 7 light gray, 8 dark gray
   ['#a97bff','#7b3fe0','#6d24b0'], ['#7fe3f5','#38bfdc','#2392b3'], ['#ffe1f6','#f6b6e6','#d58cc6'], ['#c455e0','#8e2fa8','#611c78'], ['#f1e6ff','#d6bcfb','#b496e6'],     // 9 mid purple (spare), 10 cyan, 11 light pink, 12 dark magenta, 13 very light purple
-  ['#9aa6ff','#6a74ea','#525ac4'], ['#4a4a62','#34344a','#26263a'], ['#336b79','#2a5663','#20434e'], ['#7782f2','#434cc4','#33288a'], ['#e07af5','#c455e0','#9b3ab8'], ['#e6bcd6','#cf9bbc','#ab7798']      // 19 medium pink (Grandrooms walls), 14 light periwinkle, 15 near black, 16 dark teal (Grandrooms floor), 17 periwinkle (can), 18 magenta (can label)
+  ['#9aa6ff','#6a74ea','#525ac4'], ['#4a4a62','#34344a','#26263a'], ['#336b79','#2a5663','#20434e'], ['#7782f2','#434cc4','#33288a'], ['#e07af5','#c455e0','#9b3ab8'], ['#e6bcd6','#cf9bbc','#ab7798'], ['#2f379f','#1f2778','#161c58'], ['#d466ec','#a22fc2','#781f96'], ['#7ff5f3','#38dadc','#23aab3'], ['#c9fcff','#84e0e8','#5ab0bd']      // 19 medium pink (Grandrooms walls), 14 light periwinkle, 15 near black, 16 dark teal (Grandrooms floor), 17 periwinkle (can), 18 magenta (can label)
 ];
 /* ISLAND GRID. Everything an island is made of sits on one grid, the same grid as the floor lines you see:
    one CELL = 13 units = one faint floor line; one bold floor line = 5 cells; a platform is 15 x 15 cells (3 bold floor cells) and islands are 4 bold floor cells apart (a gap of 1).
@@ -1182,15 +1182,15 @@ const PRESETS = {
   bridge:  [[0,2,0,3,9,6],[10,2,0,3,9,6],[3,4,5,7,5,2],[5,5,7,3,3,3]],
   pillars: [[0,0,0,3,3,9],[5,5,0,3,3,6],[10,10,0,3,3,11],[10,0,0,3,3,3],[0,10,0,3,3,5]],
   /* THE BRAINROOMS: a CRT computer with a screen icon, power button, keyboard and mouse */
-  computer: {c:[13,0],b:[[2,2,2,8,6,6,0],[2,9,0,8,3,1,0],[3,0,3,6,2,4,0],[4,3,0,4,4,1,0],[11,6,0,2,3,1,0],[5,4,1,2,2,1,0],[3,8,4,6,1,3,1],[3,9,1,6,1,1,1],[3,11,1,6,1,1,1],[8,4,0,4,1,1,1],[11,5,0,1,1,1,1]]},
+  computer: {c:[13,0],b:[[2,2,2,8,5,5,0],[2,9,0,8,3,1,0],[3,0,3,6,2,4,0],[4,3,0,4,4,1,0],[2,7,2,8,1,1,0],[2,2,7,8,6,1,0],[11,6,0,2,3,1,0],[2,7,3,1,1,4,0],[9,7,3,1,1,4,0],[5,4,1,2,2,1,0],[3,7,3,6,1,4,1],[3,9,1,6,1,1,1],[3,11,1,6,1,1,1],[8,4,0,4,1,1,1],[11,5,0,1,1,1,1]]},
   /* The Grandrooms: a room with a doorway, a fridge, a table and an armchair. c = walls, silver, dark */
   room: {c:[7,1,8,16],b:[[0,0,1,13,1,10,0],[0,1,1,1,12,10,0],[0,0,0,13,13,1,3],[8,2,1,4,3,9,1],[1,7,4,4,6,1,1],[9,5,1,3,1,4,1],[9,5,6,3,1,4,1],[1,7,1,1,1,3,1],[1,12,1,1,1,3,1],[4,7,1,1,1,3,1],[4,12,1,1,1,3,1],[8,5,1,1,1,1,1],[8,5,4,1,1,1,1],[8,5,6,1,1,1,1],[8,5,9,1,1,1,1],[8,5,5,4,1,1,2],[8,5,2,1,1,2,2],[8,5,7,1,1,2,2]]},
   /* Everything's Connected: a can with rims, a lid, a pull tab and a square label */
-  can: {c:[17,7,8,15,18,1,14],b:[[3,5,1,7,3,7,0],[4,4,1,5,5,7,0],[5,3,6,3,7,2,0],[5,3,1,3,7,2,0],[7,3,3,1,1,3,0],[5,4,0,3,5,1,2],[4,5,0,5,3,1,2],[7,5,8,1,3,1,2],[5,5,8,2,1,1,2],[5,7,8,2,1,1,2],[4,5,8,1,3,1,1],[8,5,8,1,3,1,1],[5,4,8,3,1,1,1],[5,8,8,3,1,1,1],[5,6,8,1,1,1,1],[5,9,5,3,1,1,4],[5,9,4,1,1,1,4],[6,9,4,2,1,1,5],[5,9,3,1,1,1,5],[6,9,3,2,1,1,6],[6,6,8,1,1,1,3]]},
+  can: {c:[17,7,8,15,18,1,20],b:[[3,5,1,7,3,7,0],[4,4,1,5,5,7,0],[5,3,6,3,7,2,0],[5,3,1,3,7,2,0],[7,3,3,1,1,3,0],[5,4,0,3,5,1,2],[4,5,0,5,3,1,2],[7,5,8,1,3,1,2],[5,5,8,2,1,1,2],[5,7,8,2,1,1,2],[4,5,8,1,3,1,1],[8,5,8,1,3,1,1],[5,4,8,3,1,1,1],[5,8,8,3,1,1,1],[5,6,8,1,1,1,1],[5,9,5,3,1,1,4],[5,9,4,1,1,1,4],[6,9,4,2,1,1,5],[5,9,3,1,1,1,5],[6,9,3,2,1,1,6],[6,6,8,1,1,1,3]]},
   /* New Eden: a tree on a stepped mound */
-  garden: {c:[10,5,8],b:[[3,3,1,7,7,1,0],[3,1,0,7,11,1,0],[1,3,0,11,7,1,0],[4,3,9,6,6,2,0],[4,2,1,5,9,1,0],[4,2,9,5,9,1,0],[2,4,1,9,5,1,0],[2,4,9,9,5,1,0],[4,9,10,5,1,1,0],[3,4,10,1,5,1,0],[2,2,0,9,9,1,0],[3,3,9,7,7,1,0],[1,5,9,1,2,1,0],[2,9,10,1,1,1,0],[3,5,11,1,1,1,0],[9,7,11,1,1,1,0],[11,7,9,1,1,1,0],[6,6,2,2,2,7,2],[5,6,2,3,3,1,2],[4,6,2,1,2,1,2],[8,6,2,1,1,1,2],[5,4,11,3,5,1,1],[4,5,11,5,3,1,1],[7,3,11,1,1,1,1]]},
+  garden: {c:[22,23,8,16],b:[[3,3,1,7,7,1,3],[3,1,0,7,11,1,3],[1,3,0,11,7,1,3],[4,2,1,5,9,1,3],[2,4,1,9,5,1,3],[2,2,0,9,9,1,3],[4,3,9,6,6,2,0],[4,2,9,5,9,1,0],[2,4,9,9,5,1,0],[4,9,10,5,1,1,0],[3,4,10,1,5,1,0],[3,3,9,7,7,1,0],[1,5,9,1,2,1,0],[2,9,10,1,1,1,0],[3,5,11,1,1,1,0],[9,7,11,1,1,1,0],[11,7,9,1,1,1,0],[6,6,2,2,2,7,2],[5,6,2,3,3,1,2],[4,6,2,1,2,1,2],[8,6,2,1,1,1,2],[5,4,11,3,5,1,1],[4,5,11,5,3,1,1],[7,3,11,1,1,1,1]]},
   /* Velvet: a stage room with pink curtains and valances, a podium and two silver dancers. c = pink, silver, dark magenta, light grey, dark grey */
-  dancers: {c:[4,1,12,7,8],b:[[0,0,0,13,13,1,4],[1,2,6,1,3,4,0],[1,8,6,1,3,4,0],[2,1,6,3,1,4,0],[8,1,6,3,1,4,0],[1,2,1,1,2,3,0],[1,9,1,1,2,3,0],[2,1,1,2,1,3,0],[9,1,1,2,1,3,0],[6,8,1,1,1,3,0],[1,5,9,1,3,1,0],[5,1,9,3,1,1,0],[1,2,5,1,2,1,0],[1,9,5,1,2,1,0],[2,1,5,2,1,1,0],[9,1,5,2,1,1,0],[1,5,8,1,1,1,0],[1,7,8,1,1,1,0],[5,1,8,1,1,1,0],[7,1,8,1,1,1,0],[0,11,1,1,2,10,3],[11,0,1,2,1,10,3],[0,0,10,1,11,1,3],[1,0,1,1,1,10,3],[0,1,1,1,1,9,3],[2,0,10,9,1,1,3],[1,1,10,1,11,1,1],[2,1,10,10,1,1,1],[1,2,4,1,2,1,1],[1,9,4,1,2,1,1],[2,1,4,2,1,1,1],[9,1,4,2,1,1,1],[6,8,4,1,1,1,1],[8,7,4,1,1,1,1],[8,7,1,1,1,3,2]]},
+  dancers: {c:[4,1,12,7,8,21],b:[[0,0,0,13,13,1,4],[1,2,6,1,3,4,5],[1,8,6,1,3,4,5],[2,1,6,3,1,4,5],[8,1,6,3,1,4,5],[1,2,1,1,2,3,5],[1,9,1,1,2,3,5],[2,1,1,2,1,3,5],[9,1,1,2,1,3,5],[1,5,9,1,3,1,5],[5,1,9,3,1,1,5],[1,2,5,1,2,1,5],[1,9,5,1,2,1,5],[2,1,5,2,1,1,5],[9,1,5,2,1,1,5],[1,5,8,1,1,1,5],[1,7,8,1,1,1,5],[5,1,8,1,1,1,5],[7,1,8,1,1,1,5],[0,11,1,1,2,10,3],[11,0,1,2,1,10,3],[0,0,10,1,11,1,3],[1,0,1,1,1,10,3],[0,1,1,1,1,9,3],[2,0,10,9,1,1,3],[1,1,10,1,11,1,1],[2,1,10,10,1,1,1],[1,2,4,1,2,1,1],[1,9,4,1,2,1,1],[2,1,4,2,1,1,1],[9,1,4,2,1,1,1],[6,8,4,1,1,1,1],[8,7,4,1,1,1,1],[6,8,1,1,1,3,0],[8,7,1,1,1,3,2]]},
   /* Orbiting the Imaginary: a planet with a tilted ring and two small moons */
   planet: {c:[6,1,7],b:[[4,4,2,5,5,5,0],[5,5,1,3,3,7,0],[5,3,3,3,7,3,0],[3,5,3,7,3,3,0],[1,4,2,1,5,1,2],[11,4,6,1,5,1,2],[5,1,4,3,1,1,2],[5,11,4,3,1,1,2],[2,3,2,1,2,1,2],[2,8,2,1,2,1,2],[4,1,3,1,2,1,2],[4,10,3,1,2,1,2],[8,1,5,1,2,1,2],[8,10,5,1,2,1,2],[10,3,6,1,2,1,2],[10,8,6,1,2,1,2],[2,2,8,1,1,1,2],[2,11,6,1,1,1,2],[3,2,3,1,1,1,2],[3,10,3,1,1,1,2],[9,2,5,1,1,1,2],[9,10,6,1,1,1,2],[11,2,9,1,1,1,2]]},
   /* Beyond the Stars: a round pink creature (feet, arms, eyes, cheeks) beside a street lamp. c = pink, magenta, silver, dark magenta, dark grey */
@@ -2120,6 +2120,24 @@ openFromHash();
 document.querySelectorAll('.about .stk, .about .pol, .about .pet').forEach(el => el.addEventListener('click', () => {
   el.classList.add('tapped'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('tapped'), 1400);
 }));
+
+/* big screens: the whole About section is scaled (CSS zoom) so its top and bottom just fit the screen under the pinned bar; phones keep their normal layout */
+(() => {
+  const sec = document.querySelector('#about'), mq = matchMedia('(min-width: 701px)'); let t = 0;
+  const fit = () => {
+    sec.style.zoom = '';
+    if(!mq.matches) return;
+    const hd = sec.querySelector('.about-head'), ab = sec.querySelector('.about'); if(!hd || !ab) return;
+    const top = hd.getBoundingClientRect().top; let bot = 0;
+    ab.querySelectorAll(':scope > *').forEach(c => { bot = Math.max(bot, c.getBoundingClientRect().bottom); });
+    const h = bot - top; if(h < 100) return;
+    const avail = innerHeight - 88 - 24;   // the screen below the pinned bar, with a little air at the bottom
+    sec.style.zoom = Math.max(.5, Math.min(1.5, innerWidth / 1280, avail / h)).toFixed(3);
+  };
+  const later = () => { clearTimeout(t); t = setTimeout(fit, 120); };
+  addEventListener('resize', later); addEventListener('load', fit); if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
+})();
 
 /* big screens: after a wheel scroll comes to rest near the next section in the direction of travel, glide onto it (same landing as the pinned-bar buttons).
    Limits: wheel only, desktop pointer, motion on, no pop-up open, next section must be less than two thirds of a screen away, never fights further input. */
