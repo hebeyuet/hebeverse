@@ -225,7 +225,7 @@ html.ready .seg button{transition:color .25s}
 @keyframes dfloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(8deg)}}
 .fx{position:absolute; left:0; top:0; pointer-events:none}
 .slot{position:absolute; width:195px; height:195px; transform-style:preserve-3d}
-.shadow{position:absolute; left:6px; top:6px; width:183px; height:183px; border-radius:30px; background:var(--shadow-c); filter:blur(14px); transform:scale(var(--sz,1))}
+.shadow{position:absolute; left:-8px; top:-8px; width:211px; height:211px; background:var(--shadow-c); transform:scale(var(--sz,1)); -webkit-mask:linear-gradient(90deg,transparent,#000 13%,#000 87%,transparent),linear-gradient(0deg,transparent,#000 13%,#000 87%,transparent); -webkit-mask-composite:source-in; mask:linear-gradient(90deg,transparent,#000 13%,#000 87%,transparent),linear-gradient(0deg,transparent,#000 13%,#000 87%,transparent); mask-composite:intersect}
 .island{position:absolute; left:0; top:0; width:195px; height:195px; transform-style:preserve-3d; transform-origin:97.5px 97.5px 0; transform:translateZ(8px) scale(var(--sz,1)); transition:transform .25s ease; cursor:pointer; outline:none}
 .island:hover,.island:focus-visible{transform:translateZ(30px) scale(var(--sz,1))}
 .isl{position:absolute; left:0; top:0; width:195px; height:195px; transform-style:preserve-3d}
@@ -272,7 +272,7 @@ html.ready .seg button{transition:color .25s}
 .lbl .t{min-width:0; overflow:hidden; text-overflow:ellipsis}
 .lbl .mk{flex:none; width:1rem; height:1rem; fill:var(--star); filter:drop-shadow(0 0 3px var(--star-glow)) drop-shadow(0 0 7px #7cf0ff); animation:twinkle 2.2s ease-in-out infinite}
 @keyframes twinkle{0%,100%{transform:scale(.8) rotate(0); opacity:.85}50%{transform:scale(1.25) rotate(45deg); opacity:1}}
-.ripple{position:absolute; left:-8px; top:-8px; width:211px; height:211px; border-radius:50%; border:5px solid #7cf0ff; box-shadow:0 0 18px 3px rgba(124,240,255,.8),inset 0 0 18px 2px rgba(124,240,255,.6); opacity:0; pointer-events:none; transform:translateZ(1px) scale(.7); animation:ripple 2.8s ease-out var(--rd,0s) infinite}
+.ripple{position:absolute; left:-43px; top:-43px; width:281px; height:281px; border-radius:50%; background:radial-gradient(circle closest-side,transparent 55%,rgba(124,240,255,.12) 59%,rgba(124,240,255,.5) 68%,#7cf0ff 71.5%,#7cf0ff 74%,rgba(124,240,255,.5) 77%,rgba(124,240,255,.12) 86%,transparent 96%); opacity:0; pointer-events:none; transform:translateZ(1px) scale(.7); will-change:transform,opacity; animation:ripple 2.8s ease-out var(--rd,0s) infinite}
 @keyframes ripple{0%{opacity:.95; transform:translateZ(1px) scale(.65)}100%{opacity:0; transform:translateZ(1px) scale(1.9)}}
 .peek{position:absolute; z-index:6; width:240px; padding:7px; border-radius:18px; pointer-events:none; background:var(--bezel); border:1.5px solid var(--metal-edge); box-shadow:var(--drop-lg)}
 .peek-screen{position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#110720; box-shadow:inset 0 0 0 2px rgba(0,0,0,.35)}
@@ -495,7 +495,12 @@ dialog.pview .pvclose svg{width:20px; height:20px}
 @media (max-width:460px){
   .brand span{display:none}
 }
-html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="off"] *::after{animation:none!important; transition:none!important; scroll-behavior:auto!important}
+html[data-motion="off"] *:not(.cd-ring):not(.cd-spin):not(.mk):not(.isl):not(.lbl):not(.ripple):not(.minicd):not(.pt-v):not(.card),html[data-motion="off"] *::after,html[data-motion="off"] *:not(.pt-v)::before{animation:none!important; transition:none!important; scroll-behavior:auto!important}
+/* motion off freezes the looping animations where they are (instead of snapping them back) */
+html[data-motion="off"] :is(.cd-ring,.cd-spin,.mk,.isl,.lbl,.ripple,.minicd,.card),html[data-motion="off"] .pt-v::before{animation-play-state:paused!important; transition:none!important}
+/* while the world is dragged/zoomed, or scrolled out of view, its animations pause */
+#worldWrap.mv *,#worldWrap.mv *::before,#worldWrap.mv *::after,#worldWrap.idle *,#worldWrap.idle *::before,#worldWrap.idle *::after{animation-play-state:paused!important}
+#worldWrap.mv .fx{visibility:hidden}
 @media (prefers-reduced-motion: reduce){
   html:not([data-motion="on"]) *,html:not([data-motion="on"]) *::before,html:not([data-motion="on"]) *::after{animation:none!important; transition:none!important; scroll-behavior:auto!important}
 }
@@ -1391,7 +1396,9 @@ function fxSpawn(isl){
     life:0, max:120 + Math.random() * 110, size:(1.2 + Math.random() * 2.2) * Math.max(s, .8) * (window.innerWidth <= 700 ? .6 : 1), col:FX_COL[(Math.random() * FX_COL.length) | 0], rise:0, k:window.innerWidth <= 700 ? .6 : 1 });
 }
 function fxLoop(){
-  fxRaf = 0; if(motion !== 'on' || !fxVisible || document.hidden || !fxW){ fxc.clearRect(0,0,fxW,fxH); parts.length = 0; return; }
+  fxRaf = 0; if(motion !== 'on' && fxVisible && !document.hidden && fxW) return;   // motion off: freeze the sparkles where they are
+  if(!fxVisible || document.hidden || !fxW){ fxc.clearRect(0,0,fxW,fxH); parts.length = 0; return; }
+  if(worldWrap.classList.contains('mv')){ fxRaf = requestAnimationFrame(fxLoop); return; }   // dragging/zooming: sparkles wait
   fxc.clearRect(0, 0, fxW, fxH);
   islands.forEach((isl, i) => { if(PROJECTS[i].featured && isl._bx != null && Math.random() < .1) fxSpawn(isl); });
   parts = parts.filter(p => p.life < p.max);
@@ -1408,7 +1415,7 @@ function fxLoop(){
   fxRaf = requestAnimationFrame(fxLoop);
 }
 function fxKick(){ if(!fxRaf) fxRaf = requestAnimationFrame(fxLoop); }
-if('IntersectionObserver' in window) new IntersectionObserver(es => { fxVisible = es[0].isIntersecting; fxKick(); }).observe(worldWrap);
+if('IntersectionObserver' in window) new IntersectionObserver(es => { fxVisible = es[0].isIntersecting; worldWrap.classList.toggle('idle', !fxVisible); fxKick(); }).observe(worldWrap);
 document.addEventListener('visibilitychange', fxKick);
 swMotion.addEventListener('click', () => setTimeout(fxKick, 0));
 const labels = el('div','labels'); labels.setAttribute('aria-hidden','true'); worldWrap.append(labels);
@@ -1523,7 +1530,8 @@ function applyPan(){
   if(zIn){ zIn.disabled = z >= ZMAX - .001; zOut.disabled = z <= ZMIN + .001; }
 }
 let viewTouched = false, panRaf = 0, panNx = 0, panNy = 0, panNz = 1, lastDragEnd = 0;
-function panTo(x, y, z){ viewTouched = true; panNx = x; panNy = y; panNz = z === undefined ? pan.z : z; if(!panRaf) panRaf = requestAnimationFrame(() => { panRaf = 0; pan.x = panNx; pan.y = panNy; pan.z = panNz; clampPan(); applyPan(); }); }   // one transform change per frame, nothing is re-laid out
+let mvT = 0; const moving = () => { if(motion !== 'on'){ fxc.clearRect(0,0,fxW,fxH); parts.length = 0; } worldWrap.classList.add('mv'); clearTimeout(mvT); mvT = setTimeout(() => { worldWrap.classList.remove('mv'); fxKick(); }, 200); };
+function panTo(x, y, z){ viewTouched = true; moving(); panNx = x; panNy = y; panNz = z === undefined ? pan.z : z; if(!panRaf) panRaf = requestAnimationFrame(() => { panRaf = 0; pan.x = panNx; pan.y = panNy; pan.z = panNz; clampPan(); applyPan(); }); }   // one transform change per frame, nothing is re-laid out
 function panAnim(on){ panBack.classList.toggle('pan-anim', on); labels.classList.toggle('pan-anim', on); }
 let dragSt = null;
 worldWrap.addEventListener('pointerdown', e => {
@@ -1559,7 +1567,7 @@ worldWrap.addEventListener('touchmove', e => {
 const touchEnd = e => { if(e.touches.length < 2) touchSt = null; };
 worldWrap.addEventListener('touchend', touchEnd); worldWrap.addEventListener('touchcancel', touchEnd);
 /* zoom: the + and - buttons, ctrl + wheel (also a trackpad pinch) and, on touch screens, pinching */
-function zoomAbout(z1, mx, my, smooth){ viewTouched = true; z1 = zClamp(z1); const z0 = pan.z, qx = (mx - pan.W / 2 - pan.x) / z0, qy = (my - pan.H / 2 - pan.y) / z0; panAnim(!!smooth); peekHide(); panTo(mx - pan.W / 2 - z1 * qx, my - pan.H / 2 - z1 * qy, z1); }
+function zoomAbout(z1, mx, my, smooth){ viewTouched = true; moving(); z1 = zClamp(z1); const z0 = pan.z, qx = (mx - pan.W / 2 - pan.x) / z0, qy = (my - pan.H / 2 - pan.y) / z0; panAnim(!!smooth); peekHide(); panTo(mx - pan.W / 2 - z1 * qx, my - pan.H / 2 - z1 * qy, z1); }
 const zIn = el('button','cbtn zbtn'), zOut = el('button','cbtn zbtn');
 zIn.type = zOut.type = 'button'; zIn.setAttribute('aria-label','Zoom in'); zOut.setAttribute('aria-label','Zoom out'); zIn.title = 'Zoom in'; zOut.title = 'Zoom out';
 zIn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg>';
